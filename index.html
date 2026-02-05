@@ -23,7 +23,12 @@
       --shadow: 0 10px 30px rgba(0,0,0,.35);
       --radius:16px;
       --radius2:12px;
+
+      --controlH:48px;
+      --labelH:18px;
+      --gap:12px;
     }
+
     *{ box-sizing:border-box; }
     body{
       margin:0;
@@ -37,7 +42,7 @@
     .container{ max-width: 1050px; margin:0 auto; }
     header{ display:flex; gap:12px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; margin: 8px 0 14px; }
     h1{ font-size:18px; margin:0; letter-spacing:.02em; }
-    .sub{ color:var(--muted); font-size:12px; line-height:1.55; margin-top:4px; max-width: 720px; }
+    .sub{ color:var(--muted); font-size:12px; line-height:1.6; margin-top:6px; max-width: 760px; }
     .pill{
       display:inline-flex; align-items:center; gap:8px;
       padding:8px 10px; border-radius:999px;
@@ -45,17 +50,20 @@
       border:1px solid rgba(122,162,255,.25);
       color:var(--text); font-size:12px; white-space:nowrap;
     }
+
     .tabs{ display:flex; gap:8px; flex-wrap:wrap; margin: 10px 0 14px; }
     .tabbtn{
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.06);
       color: var(--text);
-      padding:10px 12px;
+      height: var(--controlH);
+      padding:0 14px;
       border-radius: 999px;
       cursor:pointer;
       font-size: 13px;
       transition:.12s;
       user-select:none;
+      display:inline-flex; align-items:center; justify-content:center;
     }
     .tabbtn:hover{ background: rgba(255,255,255,.10); }
     .tabbtn.active{
@@ -63,7 +71,7 @@
       border-color: rgba(122,162,255,.35);
     }
 
-    .grid{ display:grid; grid-template-columns: 1.2fr .8fr; gap:12px; }
+    .grid{ display:grid; grid-template-columns: 1.2fr .8fr; gap:var(--gap); }
     @media (max-width: 900px){ .grid{ grid-template-columns: 1fr; } }
 
     .card{
@@ -73,13 +81,40 @@
       padding: 14px;
       box-shadow: var(--shadow);
     }
-    .card h2{ margin:0 0 10px; font-size:14px; letter-spacing:.02em; }
-    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end; margin: 10px 0; }
-    .field{ flex: 1 1 180px; min-width: 160px; }
-    label{ display:block; font-size:12px; color:var(--muted); margin:0 0 6px; }
+    .card h2{ margin:0 0 12px; font-size:14px; letter-spacing:.02em; }
+
+    /* ---- unified form layout ---- */
+    .formGrid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--gap);
+      align-items:end;
+    }
+    @media (max-width: 900px){
+      .formGrid{ grid-template-columns: repeat(12, 1fr); }
+    }
+    .col-12{ grid-column: span 12; }
+    .col-6{ grid-column: span 6; }
+    .col-4{ grid-column: span 4; }
+    .col-3{ grid-column: span 3; }
+    @media (max-width: 700px){
+      .col-6,.col-4,.col-3{ grid-column: span 12; }
+    }
+
+    .field label{
+      display:block;
+      height: var(--labelH);
+      font-size:12px;
+      color:var(--muted);
+      margin:0 0 6px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
     input, select, textarea{
       width:100%;
-      padding: 12px 12px;
+      height: var(--controlH);
+      padding: 0 12px;
       background: rgba(10,16,28,.6);
       border:1px solid rgba(255,255,255,.12);
       color: var(--text);
@@ -87,17 +122,29 @@
       outline:none;
       font-size: 14px;
     }
-    textarea{ min-height: 74px; resize: vertical; }
+    textarea{
+      height:auto;
+      min-height: 90px;
+      padding: 10px 12px;
+      resize: vertical;
+    }
+
+    .hint{ color:var(--muted); font-size:12px; line-height:1.5; margin-top:6px; }
+    .sep{ height:1px; background: rgba(255,255,255,.10); margin: 14px 0; }
+
     .btn{
       border:1px solid rgba(255,255,255,.12);
       background: var(--btn);
       color: var(--text);
-      padding: 11px 12px;
+      height: var(--controlH);
+      padding:0 14px;
       border-radius: var(--radius2);
       cursor:pointer;
       font-size: 13px;
       transition:.12s;
       user-select:none;
+      display:inline-flex; align-items:center; justify-content:center;
+      white-space:nowrap;
     }
     .btn:hover{ background: var(--btn2); }
     .btn.primary{
@@ -111,34 +158,66 @@
     .btn.ghost{ background: transparent; }
     .btn:disabled{ opacity:.5; cursor:not-allowed; }
 
-    .hint{ color:var(--muted); font-size:12px; line-height:1.5; margin-top:6px; }
-    .sep{ height:1px; background: rgba(255,255,255,.10); margin: 12px 0; }
+    .btnRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btnRow .btn{ flex: 0 0 auto; }
+    @media (max-width: 700px){
+      .btnRow .btn{ flex: 1 1 180px; }
+    }
 
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 8px 10px; border-radius: 999px;
+    .chip{
+      display:inline-flex; align-items:center; justify-content:center;
+      height: var(--controlH);
+      padding: 0 12px;
+      border-radius: var(--radius2);
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
-      font-size: 12px;
-      margin: 6px 6px 0 0;
-      user-select:none;
-      white-space:nowrap;
+      font-size: 14px;
+      font-weight: 800;
+      min-width: 92px;
     }
-    .badge strong{ font-size:12px; }
+    .stepRow{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap:10px;
+      align-items:center;
+    }
+    .stepRow .btn{ width:100%; }
+    .stepRow .chip{ width:100%; }
+    @media (max-width: 700px){
+      .stepRow{ grid-template-columns: 1fr 1fr; }
+    }
 
     .result{
-      margin-top: 10px;
+      margin-top: 12px;
       padding: 12px;
       border-radius: var(--radius2);
       background: rgba(15,24,42,.65);
       border:1px solid rgba(255,255,255,.10);
     }
+    .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 10px; }
+    .badge{
+      display:inline-flex; align-items:center; justify-content:center;
+      height: 34px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      font-size: 12px;
+      font-weight: 800;
+      white-space:nowrap;
+    }
     .kpi{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap:10px;
       margin-top: 10px;
     }
+    @media (max-width: 900px){ .kpi{ grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 520px){ .kpi{ grid-template-columns: 1fr; } }
     .k{
       padding: 10px 12px;
@@ -147,33 +226,7 @@
       border-radius: var(--radius2);
     }
     .k .t{ font-size:12px; color:var(--muted); }
-    .k .v{ font-size:16px; margin-top:6px; font-weight: 800; letter-spacing:.02em; }
-
-    .ref{ color: var(--green); font-weight: 800; }
-    .warnY{ color: var(--yellow); font-weight: 900; }
-    .warnR{ color: var(--red); font-weight: 900; }
-
-    .list{ display:flex; flex-direction:column; gap:10px; margin-top:10px; }
-    .item{
-      padding: 12px;
-      border-radius: var(--radius2);
-      background: rgba(15,24,42,.65);
-      border:1px solid rgba(255,255,255,.10);
-    }
-    .itemtop{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center; }
-    .itemtitle{ font-weight:900; letter-spacing:.02em; }
-    .meta{ color:var(--muted); font-size:12px; margin-top:6px; line-height:1.55; }
-    .minirow{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:10px; }
-    .stepbtn{
-      padding: 9px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      cursor:pointer;
-      font-size: 12px;
-      user-select:none;
-    }
-    .stepbtn:hover{ background: rgba(255,255,255,.10); }
+    .k .v{ font-size:16px; margin-top:6px; font-weight: 900; letter-spacing:.02em; }
 
     table{ width:100%; border-collapse: collapse; margin-top:10px; }
     th, td{
@@ -183,7 +236,7 @@
       text-align:left;
       vertical-align: top;
     }
-    th{ color: var(--muted); font-weight: 800; }
+    th{ color: var(--muted); font-weight: 900; }
     .right{ text-align:right; }
     .hidden{ display:none !important; }
 
@@ -198,33 +251,45 @@
       z-index: 9999;
     }
     .modal{
-      width: min(720px, 100%);
-      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      width: min(760px, 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
       border:1px solid rgba(255,255,255,.12);
       border-radius: 18px;
       box-shadow: var(--shadow);
       padding: 14px;
     }
-    .modal h3{ margin: 0 0 10px; font-size: 14px; }
+    .modal h3{ margin: 0 0 12px; font-size: 14px; }
     .seg{
       display:flex; gap:8px; flex-wrap:wrap;
     }
     .seg button{
+      height: var(--controlH);
+      padding: 0 14px;
+      border-radius: 999px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       color: var(--text);
-      padding: 10px 12px;
-      border-radius: 999px;
       cursor:pointer;
       font-size: 13px;
       user-select:none;
+      display:inline-flex; align-items:center; justify-content:center;
     }
     .seg button.active{
       background: rgba(122,162,255,.18);
       border-color: rgba(122,162,255,.35);
     }
-    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    @media (max-width: 620px){ .grid2{ grid-template-columns: 1fr; } }
+    .small{ font-size:12px; color:var(--muted); line-height:1.6; }
+
+    .list{ display:flex; flex-direction:column; gap:10px; margin-top:10px; }
+    .item{
+      padding: 12px;
+      border-radius: var(--radius2);
+      background: rgba(15,24,42,.65);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .itemtop{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center; }
+    .itemtitle{ font-weight:900; letter-spacing:.02em; }
+    .meta{ color:var(--muted); font-size:12px; margin-top:6px; line-height:1.55; }
   </style>
 </head>
 <body>
@@ -233,14 +298,12 @@
       <div>
         <h1>ドラゴンハナハナ～閃光～｜設定判別ツール（個人用）</h1>
         <div class="sub">
-          ・ドラハナは<strong>BIG偏向型</strong>なので、高設定でもREGが引けない展開は普通にあります（REGが弱い＝即NGはしません）<br>
-          ・REG後フェザーは<strong>設定確定</strong>（最優先）。BIG後フェザーは<strong>示唆のみ</strong>（青LOW〜赤やや高設定寄り）<br>
-          ・当選G数は「合算の補助」だけに使用（上振れブレ防止）。分布は<strong>100G刻み</strong>で表示
+          ・ドラハナは<strong>BIG偏向型</strong>（REGが弱い＝即NGはしません）<br>
+          ・REG後フェザーは<strong>設定確定</strong>（最優先）。BIG後フェザーは<strong>示唆のみ</strong><br>
+          ・当選G数は「合算の補助」だけに使用。分布は<strong>100G刻み</strong>
         </div>
       </div>
-      <div class="pill">
-        <strong>直近10件表示</strong><span style="color:var(--muted)">／</span><small>全件保存</small>
-      </div>
+      <div class="pill"><strong>直近10件表示</strong><span style="color:var(--muted)">／</span><small>全件保存</small></div>
     </header>
 
     <div class="tabs">
@@ -255,89 +318,81 @@
         <div class="card">
           <h2>入力</h2>
 
-          <div class="row">
-            <div class="field">
+          <div class="formGrid">
+            <div class="field col-6">
               <label>総回転数（通常G）</label>
               <input id="totalG" inputmode="numeric" placeholder="例：3200" />
               <div class="hint">区間（序盤/中盤/終盤）の切替に使うよ。</div>
             </div>
-            <div class="field">
+
+            <div class="field col-3">
               <label>BIG回数</label>
               <input id="bigCnt" inputmode="numeric" placeholder="例：12" />
             </div>
-            <div class="field">
+
+            <div class="field col-3">
               <label>REG回数</label>
               <input id="regCnt" inputmode="numeric" placeholder="例：6" />
             </div>
-          </div>
 
-          <div class="row">
-            <div class="field">
+            <div class="field col-6">
               <label>ベル回数（手入力）</label>
               <input id="bellCnt" inputmode="numeric" placeholder="例：420（カチカチ君の合計）" />
-              <div class="hint">※ベルは逆算値のみなので、判定には強く使わず「参考」扱い。</div>
+              <div class="hint">※ベルは逆算値のみなので判定は“参考”扱い。</div>
             </div>
 
-            <div class="field">
+            <div class="field col-6">
               <label>BIG中スイカ回数（ワンタップ）</label>
-              <div class="minirow">
-                <button class="stepbtn" id="suiMinus">-1</button>
-                <div class="badge"><strong id="suiVal">0</strong><span style="color:var(--muted)">回</span></div>
-                <button class="stepbtn" id="suiPlus">+1</button>
-                <button class="stepbtn" id="suiReset">リセット</button>
+              <div class="stepRow">
+                <button class="btn" id="suiMinus" type="button">-1</button>
+                <div class="chip"><span id="suiVal">0</span>&nbsp;回</div>
+                <button class="btn" id="suiPlus" type="button">+1</button>
+                <button class="btn ghost" id="suiReset" type="button">リセット</button>
               </div>
-              <div class="hint">※回数が少ない区間はブレやすいので、評価は控えめにするよ。</div>
+              <div class="hint">※序盤はブレやすいので評価は控えめ。</div>
             </div>
-          </div>
 
-          <div class="row">
-            <button class="btn primary" id="btnJudge">判定する</button>
-            <button class="btn ghost" id="btnQuickHit">当選を追加（BIG/REGまとめ入力）</button>
-            <button class="btn ghost" id="btnResetAll">入力リセット</button>
+            <div class="col-12">
+              <div class="btnRow">
+                <button class="btn primary" id="btnJudge" type="button">判定する</button>
+                <button class="btn" id="btnQuickHit" type="button">当選を追加（まとめ入力）</button>
+                <button class="btn ghost" id="btnResetAll" type="button">入力リセット</button>
+              </div>
+            </div>
           </div>
 
           <div id="judgeResult" class="result hidden">
-            <div class="badge"><strong id="rankText">-</strong></div>
-            <div class="badge"><strong id="phaseText">-</strong></div>
-            <div class="badge"><strong id="guaranteeText">-</strong></div>
+            <div class="badges">
+              <div class="badge" id="rankText">-</div>
+              <div class="badge" id="phaseText">-</div>
+              <div class="badge" id="guaranteeText">-</div>
+            </div>
 
             <div class="kpi">
-              <div class="k">
-                <div class="t">合算</div>
-                <div class="v" id="bonusRate">-</div>
-              </div>
-              <div class="k">
-                <div class="t">REG</div>
-                <div class="v" id="regRate">-</div>
-              </div>
-              <div class="k">
-                <div class="t">BIG</div>
-                <div class="v" id="bigRate">-</div>
-              </div>
-              <div class="k">
-                <div class="t">当選G分布（補助）</div>
-                <div class="v ref" id="distHint">-</div>
-              </div>
+              <div class="k"><div class="t">合算</div><div class="v" id="bonusRate">-</div></div>
+              <div class="k"><div class="t">REG</div><div class="v" id="regRate">-</div></div>
+              <div class="k"><div class="t">BIG</div><div class="v" id="bigRate">-</div></div>
+              <div class="k"><div class="t">当選G分布（補助）</div><div class="v" id="distHint">-</div></div>
             </div>
 
             <div class="sep"></div>
-            <div class="small" style="color:var(--muted); line-height:1.6;">
+            <div class="small">
               <div><strong>根拠</strong>：<span id="reasonText">-</span></div>
               <div style="margin-top:6px;"><strong>コメント</strong>：<span id="commentText">-</span></div>
-              <div style="margin-top:6px;">※ドラハナはBIG偏向型なので、REGが弱いこと自体は否定材料にしません。REGが引けていれば「良い材料」として加点します。</div>
+              <div style="margin-top:6px;">※ドラハナはBIG偏向型。REGが弱いこと自体は否定材料にしません（REGが良い時だけ加点）。</div>
             </div>
           </div>
         </div>
 
         <div class="card">
-          <h2>フェザー・示唆の扱い</h2>
-          <div class="small" style="line-height:1.7;">
-            <div class="badge"><strong>REG後フェザー</strong>：設定確定（最優先）</div>
-            <div class="badge"><strong>BIG後フェザー</strong>：示唆のみ（青LOW〜赤やや高設定寄り）</div>
+          <h2>仕様メモ（固定）</h2>
+          <div class="small">
+            <div><strong>REG後フェザー</strong>：設定確定（最優先）</div>
+            <div><strong>BIG後フェザー</strong>：示唆のみ（青LOW〜赤やや高設定寄り）</div>
             <div class="sep"></div>
             <div>
-              <div style="color:var(--muted);">設定別ボーナス確率（入力済み前提）</div>
-              <div class="small" style="margin-top:6px;">
+              <div style="color:var(--muted); font-weight:900;">設定別ボーナス確率</div>
+              <div style="margin-top:6px;">
                 設1 BIG1/256 REG1/642 合算1/183<br>
                 設2 BIG1/246 REG1/585 合算1/173<br>
                 設3 BIG1/235 REG1/537 合算1/163<br>
@@ -347,10 +402,7 @@
               </div>
             </div>
             <div class="sep"></div>
-            <div class="small">
-              ベルは逆算値のみなので、判定では<strong>参考</strong>として扱うよ。<br>
-              「7を切ってれば好感触かも」くらいの温度感で表示するね。
-            </div>
+            <div>ベルは逆算値しか無いので「参考」表示のみ。</div>
           </div>
         </div>
       </div>
@@ -361,26 +413,32 @@
       <div class="grid">
         <div class="card">
           <h2>直近10件（当選G）</h2>
-          <div class="small">※全件は裏で保存。ここは入力の手触り優先で直近だけ表示。</div>
-          <div class="row" style="margin-top:10px;">
-            <button class="btn primary" id="btnAddHit">当選を追加（BIG/REG）</button>
-            <button class="btn danger" id="btnDelLast">直近1件削除</button>
+          <div class="small">※全件は保存。ここは直近のみ表示。</div>
+
+          <div class="btnRow" style="margin-top:12px;">
+            <button class="btn primary" id="btnAddHit" type="button">当選を追加（BIG/REG）</button>
+            <button class="btn danger" id="btnDelLast" type="button">直近1件削除</button>
           </div>
+
           <div class="list" id="hitList"></div>
-          <div id="noHits" class="small" style="margin-top:10px; color:var(--muted);">まだ当選履歴がありません。</div>
+          <div id="noHits" class="small" style="margin-top:10px;">まだ当選履歴がありません。</div>
         </div>
 
         <div class="card">
           <h2>当選分布（100G刻み）</h2>
-          <div class="small">0〜100 / 100〜200 … の区切りで、BIG/REG別にも出すよ。</div>
-          <div class="row">
-            <div class="field">
+          <div class="small">0〜100 / 100〜200 … で、BIG/REG別も表示。</div>
+
+          <div class="formGrid" style="margin-top:12px;">
+            <div class="field col-8">
               <label>表示上限（G）</label>
               <input id="histMaxG" inputmode="numeric" placeholder="空欄なら自動（最大当選Gに合わせる）" />
-              <div class="hint">例：2000 と入れたら 0〜2000 まで表示。</div>
             </div>
-            <button class="btn" id="btnRefreshHist">分布を更新</button>
+            <div class="col-4">
+              <label>&nbsp;</label>
+              <button class="btn" id="btnRefreshHist" type="button">分布を更新</button>
+            </div>
           </div>
+
           <div id="histWrap"></div>
         </div>
       </div>
@@ -391,23 +449,15 @@
       <div class="card">
         <h2>引き継ぎ（書き出し / 読み込み）</h2>
         <div class="small">
-          ・端末変更やSafariのデータ消去に備えて、定期的に「書き出し」推奨。<br>
-          ・このツールは更新しても履歴が消えない設計（キー固定＋バージョン管理）。
+          端末変更やSafariのデータ消去に備えて、定期的にJSONを書き出してね。<br>
+          ※更新で履歴が消えないようにキー固定＋バージョン管理にしてあるよ。
         </div>
 
-        <div class="row" style="margin-top:12px;">
+        <div class="btnRow" style="margin-top:12px;">
           <button class="btn primary" id="exportBtn" type="button">JSONを書き出す</button>
           <button class="btn" id="importBtn" type="button">JSONを読み込む</button>
+          <button class="btn danger" id="btnWipeAll" type="button">全データ削除</button>
           <input id="importFile" type="file" accept="application/json" class="hidden">
-        </div>
-
-        <div class="sep"></div>
-
-        <div class="row">
-          <button class="btn danger" id="btnWipeAll" type="button">全データ削除（注意）</button>
-        </div>
-        <div class="small" style="margin-top:8px;">
-          ※本当に全部消えるよ。消す前に「JSONを書き出す」しておくのがおすすめ。
         </div>
       </div>
     </section>
@@ -418,27 +468,25 @@
     <div class="modal">
       <h3>当選を追加（まとめ入力）</h3>
 
-      <div class="row" style="margin-top:6px;">
-        <div class="field" style="min-width: 200px;">
+      <div class="formGrid">
+        <div class="field col-6">
           <label>当選G数</label>
           <input id="mHitG" inputmode="numeric" placeholder="例：380" />
-          <div class="hint">当選Gは合算の補助に使う（分布も保存）。</div>
+          <div class="hint">当選Gは合算の補助＆分布保存に使うよ。</div>
         </div>
 
-        <div class="field" style="min-width: 240px;">
+        <div class="field col-6">
           <label>種別</label>
           <div class="seg" id="mTypeSeg">
             <button type="button" data-type="BIG" class="active">BIG</button>
             <button type="button" data-type="REG">REG</button>
           </div>
         </div>
-      </div>
 
-      <div class="sep"></div>
+        <div class="col-12"><div class="sep"></div></div>
 
-      <div class="grid2">
-        <div>
-          <label>フェザーランプ（BIG後：示唆のみ）</label>
+        <div class="field col-6">
+          <label>フェザー（BIG後：示唆のみ）</label>
           <select id="mFeatherBig">
             <option value="none">未入力</option>
             <option value="white">白（LOW）</option>
@@ -447,11 +495,10 @@
             <option value="green">緑（MID）</option>
             <option value="red">赤（やや高設定寄り）</option>
           </select>
-          <div class="hint">※BIG後は設定確定にはしません。</div>
         </div>
 
-        <div>
-          <label>フェザーランプ（REG後：設定確定）</label>
+        <div class="field col-6">
+          <label>フェザー（REG後：設定確定）</label>
           <select id="mFeatherReg">
             <option value="none">未入力</option>
             <option value="blue">青（設定2以上確定）</option>
@@ -460,54 +507,50 @@
             <option value="red">赤（設定5以上確定）</option>
             <option value="rainbow">虹（設定6確定）</option>
           </select>
-          <div class="hint">※REGの時だけ有効。BIG選択中は無視されます。</div>
+          <div class="hint">※REG選択時のみ有効（BIG選択中は無効）。</div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="field">
+        <div class="field col-6">
           <label>REG中サイドランプ（任意）</label>
           <select id="mSideLamp">
             <option value="none">未入力</option>
             <option value="blue">青（奇数示唆）</option>
-            <option value="green">緑（奇数寄り＋高設定寄り）</option>
+            <option value="green">緑（奇数＋高設定寄り）</option>
             <option value="yellow">黄（偶数示唆）</option>
-            <option value="red">赤（偶数寄り＋高設定寄り）</option>
+            <option value="red">赤（偶数＋高設定寄り）</option>
             <option value="rainbow">虹（高設定期待度UP）</option>
           </select>
-          <div class="hint">※REGの時だけ有効（BIG選択中は無視）。</div>
+          <div class="hint">※REG選択時のみ有効。</div>
         </div>
 
-        <div class="field">
+        <div class="field col-6">
           <label>このボーナスでBIG中スイカを足す（任意）</label>
-          <div class="minirow">
-            <button class="stepbtn" id="mSuiMinus">-1</button>
-            <div class="badge"><strong id="mSuiAdd">0</strong><span style="color:var(--muted)">回</span></div>
-            <button class="stepbtn" id="mSuiPlus">+1</button>
-            <button class="stepbtn" id="mSuiZero">0に戻す</button>
+          <div class="stepRow">
+            <button class="btn" id="mSuiMinus" type="button">-1</button>
+            <div class="chip"><span id="mSuiAdd">0</span>&nbsp;回</div>
+            <button class="btn" id="mSuiPlus" type="button">+1</button>
+            <button class="btn ghost" id="mSuiZero" type="button">0に戻す</button>
           </div>
-          <div class="hint">※BIGの時だけ加算されます（REGの時は無視）。</div>
+          <div class="hint">※BIG選択時のみ加算。</div>
         </div>
-      </div>
 
-      <div class="row" style="justify-content:space-between;">
-        <button class="btn ghost" id="mCancel" type="button">キャンセル</button>
-        <div class="minirow">
-          <button class="btn" id="mSaveOnly" type="button">保存（当選だけ）</button>
-          <button class="btn primary" id="mSaveAndApply" type="button">保存してカウントにも反映</button>
+        <div class="col-12">
+          <div class="btnRow" style="justify-content:space-between;">
+            <button class="btn ghost" id="mCancel" type="button">キャンセル</button>
+            <div class="btnRow" style="flex:0 0 auto;">
+              <button class="btn" id="mSaveOnly" type="button">保存（当選だけ）</button>
+              <button class="btn primary" id="mSaveAndApply" type="button">保存してカウントにも反映</button>
+            </div>
+          </div>
+          <div class="small" style="margin-top:8px;">
+            「保存してカウントにも反映」＝BIG/REG回数・スイカ回数に自動で加算（手間削減）。
+          </div>
         </div>
-      </div>
-
-      <div class="small" style="margin-top:8px; color:var(--muted);">
-        「保存してカウントにも反映」＝BIG/REG回数・スイカ回数に自動で加算するよ（手間削減）。
       </div>
     </div>
   </div>
 
   <script>
-    /***********************
-     * 永続保存
-     ***********************/
     const STORAGE_KEY = "dragon_hana_senka_v1";
     const STORAGE_VERSION = 1;
 
@@ -531,27 +574,9 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(fallback));
       return fallback;
     }
-    function saveStore(store){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
-    }
+    function saveStore(store){ localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }
     let store = loadStore();
 
-    /***********************
-     * 設定別テーブル（あなた提供）
-     ***********************/
-    const TABLE = [
-      {s:1, big:256, reg:642, all:183},
-      {s:2, big:246, reg:585, all:173},
-      {s:3, big:235, reg:537, all:163},
-      {s:4, big:224, reg:489, all:153},
-      {s:5, big:212, reg:442, all:143},
-      {s:6, big:199, reg:399, all:133},
-    ];
-
-    /***********************
-     * utils
-     ***********************/
-    function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
     function parseIntSafe(v){
       const n = parseInt(String(v ?? "").replace(/[^\d]/g,""), 10);
       return Number.isFinite(n) ? n : null;
@@ -575,16 +600,12 @@
     }
     function escapeHtml(s){
       return String(s ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+        .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;").replaceAll("'","&#039;");
     }
+    function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
 
-    /***********************
-     * tabs
-     ***********************/
+    // tabs
     const tabBtns = Array.from(document.querySelectorAll(".tabbtn"));
     const tabs = {
       judge: document.getElementById("tab-judge"),
@@ -598,9 +619,7 @@
     }
     tabBtns.forEach(b => b.addEventListener("click", () => openTab(b.dataset.tab)));
 
-    /***********************
-     * inputs bind
-     ***********************/
+    // bind inputs
     const elTotalG = document.getElementById("totalG");
     const elBigCnt = document.getElementById("bigCnt");
     const elRegCnt = document.getElementById("regCnt");
@@ -628,7 +647,7 @@
       elBellCnt.addEventListener(evt, saveInputsFromUI);
     });
 
-    // BIG中スイカ（ワンタップ）
+    // sui counter
     document.getElementById("suiPlus").addEventListener("click", () => {
       store.inputs.sui = (store.inputs.sui ?? 0) + 1;
       elSuiVal.textContent = String(store.inputs.sui);
@@ -645,9 +664,6 @@
       saveStore(store);
     });
 
-    /***********************
-     * phase logic
-     ***********************/
     function phaseFromG(g){
       if(g >= 4000) return {key:"late", label:"終盤（4000G〜）"};
       if(g >= 2500) return {key:"mid",  label:"中盤（2500〜4000G）"};
@@ -655,9 +671,7 @@
       return {key:"pre", label:"準備（〜1000G）"};
     }
 
-    /***********************
-     * hit distribution (100G bins)
-     ***********************/
+    // distribution
     function buildHistBins(maxGOverride){
       const hits = store.hits || [];
       const maxHit = hits.reduce((m,h)=>Math.max(m, h.g||0), 0);
@@ -680,12 +694,10 @@
       return bins;
     }
 
-    // 合算補助：浅い当選が多い/深い当選が多い をざっくり評価（影響は小）
     function distScoreHint(){
       const hits = store.hits || [];
       if(hits.length < 8) return { text:"データ少（補助は弱め）", score: 0 };
 
-      // 直近20件で判定（全件だと古い癖が混ざる）
       const recent = hits.slice(-20);
       let shallow = 0; // 0-200
       let deep = 0;    // 600+
@@ -693,7 +705,6 @@
         if(h.g < 200) shallow++;
         if(h.g >= 600) deep++;
       }
-      // 影響は最大±2程度に抑える
       let score = 0;
       if(shallow >= 8) score += 2;
       else if(shallow >= 6) score += 1;
@@ -710,9 +721,6 @@
       return { text, score };
     }
 
-    /***********************
-     * feather / side lamp evaluation
-     ***********************/
     function minSettingFromRegFeather(val){
       if(val === "blue") return 2;
       if(val === "yellow") return 3;
@@ -722,7 +730,6 @@
       return null;
     }
     function bigFeatherScore(val){
-      // BIG後は示唆のみ：青LOW、赤でも「やや高設定寄り」程度
       if(val === "blue") return 0.3;
       if(val === "yellow") return 0.5;
       if(val === "green") return 0.8;
@@ -731,7 +738,6 @@
       return 0.0;
     }
     function sideLampHint(val){
-      // 参考：奇偶 + 高設定寄りニュアンス
       if(val === "blue") return { odd:1, even:0, hi:0 };
       if(val === "green") return { odd:1, even:0, hi:0.3 };
       if(val === "yellow") return { odd:0, even:1, hi:0 };
@@ -739,21 +745,19 @@
       if(val === "rainbow") return { odd:0, even:0, hi:0.8 };
       return { odd:0, even:0, hi:0 };
     }
-
     function aggregateHints(){
       const hits = store.hits || [];
       let minSet = 0;
       let bigFeather = 0;
-      let odd = 0, even = 0, hi = 0;
+      let odd = 0, even = 0;
 
-      // 直近100件だけ集計（全件だと古い癖が混ざる）
       const recent = hits.slice(-100);
       for(const h of recent){
         if(h.type === "REG"){
           const ms = minSettingFromRegFeather(h.featherReg);
           if(ms) minSet = Math.max(minSet, ms);
           const sh = sideLampHint(h.sideLamp);
-          odd += sh.odd; even += sh.even; hi += sh.hi;
+          odd += sh.odd; even += sh.even;
         }
         if(h.type === "BIG"){
           bigFeather += bigFeatherScore(h.featherBig);
@@ -765,20 +769,14 @@
         else if(even > odd + 1) parity = "偶数寄り";
         else parity = "拮抗";
       }
-      return { minSet, bigFeather, parity, hiHint: hi };
+      return { minSet, bigFeather, parity };
     }
 
-    /***********************
-     * judge scoring (safe, practical)
-     * - REG is "add-only" (never negative)
-     * - BIG偏りは許容（BIG/REG比率で否定しない）
-     * - 確定フェザーは最優先で上書き
-     ***********************/
     function judge(){
       const g = parseIntSafe(elTotalG.value) ?? 0;
       const big = parseIntSafe(elBigCnt.value) ?? 0;
       const reg = parseIntSafe(elRegCnt.value) ?? 0;
-      const bell = parseIntSafe(elBellCnt.value); // may be null
+      const bell = parseIntSafe(elBellCnt.value);
       const sui = store.inputs.sui ?? 0;
 
       const phase = phaseFromG(g);
@@ -787,7 +785,6 @@
       const dist = distScoreHint();
       const hints = aggregateHints();
 
-      // 確定があれば上書き（最優先）
       let guarantee = null;
       if(hints.minSet >= 6) guarantee = "設定6濃厚（REG後フェザー虹）";
       else if(hints.minSet >= 5) guarantee = "設定5以上濃厚（REG後フェザー赤）";
@@ -795,23 +792,18 @@
       else if(hints.minSet >= 3) guarantee = "設定3以上濃厚（REG後フェザー黄）";
       else if(hints.minSet >= 2) guarantee = "設定2以上濃厚（REG後フェザー青）";
 
-      // ベーススコア（0〜）
       let score = 0;
       let reasons = [];
 
-      // フェザー（BIG後示唆）は小さく加点
       if(hints.bigFeather > 0){
         const add = clamp(hints.bigFeather, 0, 3);
         score += add;
         reasons.push(`BIG後フェザー示唆 +${add.toFixed(1)}`);
       }
 
-      // 合算（相対評価：高設定ほど合算が軽い）
-      // ただし序盤はブレるので重み弱め
+      // 合算（控えめに評価）
       if(g >= 500 && totalBonus >= 3){
         const obsAll = g / Math.max(1, totalBonus);
-        // 設定4〜6寄りなら加点、設定1〜2寄りなら据え置き（極端に悪くても強い減点はしない）
-        // 目安として、設定3(1/163)より良い(数値が小さい)なら加点
         const good = obsAll <= 163;
         const veryGood = obsAll <= 153;
         const excellent = obsAll <= 143;
@@ -821,7 +813,6 @@
         if(phase.key === "mid") w = 1.4;
         if(phase.key === "late") w = 1.7;
 
-        // 分布補正（小さめ）
         const distAdj = dist.score * 0.3;
 
         if(excellent) { score += 3.0*w + distAdj; reasons.push(`合算かなり良い（〜設5-6帯）`); }
@@ -832,7 +823,7 @@
         reasons.push("合算：サンプル少（参考）");
       }
 
-      // REG（加点のみ。弱くても減点しない）
+      // REG（加点のみ）
       if(g >= 800 && reg >= 2){
         const obsReg = g / Math.max(1, reg);
         let w = 1.0;
@@ -846,12 +837,12 @@
         else if(obsReg <= 537) { score += 1.5*w; reasons.push("REGがやや良い（設3帯）"); }
         else if(obsReg <= 585) { score += 0.9*w; reasons.push("REGは悪くない（設2帯）"); }
         else if(obsReg <= 642) { score += 0.4*w; reasons.push("REGは標準域（設1帯）"); }
-        else { score += 0.0; reasons.push("REGは荒れやすい（否定材料にしない）"); }
+        else { reasons.push("REGは荒れやすい（否定材料にしない）"); }
       } else {
         reasons.push("REG：少ない場合は加点しづらい（否定はしない）");
       }
 
-      // BIG（偏り許容。弱い/強いの評価は控えめ）
+      // BIG（偏り許容：軽い加点のみ）
       if(g >= 800 && big >= 2){
         const obsBig = g / Math.max(1, big);
         let w = 1.0;
@@ -863,16 +854,14 @@
         else if(obsBig <= 212) { score += 1.0*w; reasons.push("BIGが軽め（設5帯）"); }
         else if(obsBig <= 224) { score += 0.8*w; reasons.push("BIGがやや軽い（設4帯）"); }
         else if(obsBig <= 235) { score += 0.6*w; reasons.push("BIGがやや軽い（設3帯）"); }
-        else if(obsBig <= 246) { score += 0.4*w; reasons.push("BIGは標準〜やや良"); }
         else { score += 0.2*w; reasons.push("BIGは標準（偏りは想定内）"); }
       } else {
         reasons.push("BIG：サンプル少（参考）");
       }
 
-      // BIG中スイカ（補助）
-      // 目安：BIG回数に対してスイカ回数が多いと少し加点。強くしすぎない。
+      // スイカ（補助）
       if(big >= 10 && sui > 0){
-        const perBig = sui / big; // 1BIGあたりのスイカ回数（ざっくり）
+        const perBig = sui / big;
         let w = 1.0;
         if(phase.key === "early") w = 0.5;
         if(phase.key === "mid") w = 0.9;
@@ -881,12 +870,12 @@
         if(perBig >= 1.0) { score += 1.0*w; reasons.push("BIG中スイカが良い（補助）"); }
         else if(perBig >= 0.8) { score += 0.7*w; reasons.push("BIG中スイカがやや良い（補助）"); }
         else if(perBig >= 0.6) { score += 0.3*w; reasons.push("BIG中スイカは標準（補助）"); }
-        else { score += 0.0; reasons.push("BIG中スイカは参考（ブレ）"); }
+        else { reasons.push("BIG中スイカは参考（ブレ）"); }
       } else {
         reasons.push("BIG中スイカ：サンプル少（参考）");
       }
 
-      // ベル（逆算値のみ＝参考コメントだけ）
+      // ベル参考コメント
       let bellMsg = "ベル：未入力";
       if(bell !== null && g > 0){
         const rate = g / Math.max(1, bell);
@@ -895,77 +884,63 @@
       }
       reasons.push(bellMsg);
 
-      // サイドランプ奇偶傾向（参考）
       if(hints.parity !== "不明"){
         reasons.push(`サイドランプ傾向：${hints.parity}（参考）`);
       }
 
-      // 分布補助テキスト
-      const distText = dist.text;
+      const bonusRate = (g && totalBonus) ? fmtRate(g, totalBonus) : "-";
+      const regRate = (g && reg) ? fmtRate(g, reg) : "-";
+      const bigRate = (g && big) ? fmtRate(g, big) : "-";
 
-      // ランク決定（確定があれば最低保証）
-      // スコアレンジはだいたい 0〜15 程度
       let rank = "NG";
       let rankText = "NG：慎重（低設定寄りの可能性）";
       if(score >= 11) { rank="S"; rankText="S：高設定濃厚（粘る価値大）"; }
       else if(score >= 8) { rank="A"; rankText="A：高設定期待（続行候補）"; }
       else if(score >= 5) { rank="B"; rankText="B：中間の可能性（様子見）"; }
 
-      // 確定で底上げ
+      // 確定で上書き/底上げ
       if(hints.minSet >= 6){
         rank="S"; rankText="S：設定6濃厚（確定）";
       } else if(hints.minSet >= 5){
-        if(rank === "NG") rank="B";
-        if(rank === "B") rank="A";
-        if(rank === "A") rank="S";
-        rankText = `S：設定5以上濃厚（確定）`;
+        rank="S"; rankText="S：設定5以上濃厚（確定）";
       } else if(hints.minSet >= 4){
         if(rank === "NG") rank="B";
         if(rank === "B") rank="A";
-        rankText = `A：設定4以上濃厚（確定）`;
+        rankText="A：設定4以上濃厚（確定）";
       } else if(hints.minSet >= 3){
         if(rank === "NG") rank="B";
-        rankText = `B：設定3以上濃厚（確定）`;
+        rankText="B：設定3以上濃厚（確定）";
       } else if(hints.minSet >= 2){
         if(rank === "NG") rank="B";
-        rankText = `B：設定2以上濃厚（確定）`;
+        rankText="B：設定2以上濃厚（確定）";
       }
 
-      // コメント
       let comment = "";
       if(hints.minSet >= 4){
-        comment = "REG後フェザー確定が出てるのが強すぎる。数値が荒れても焦らず、資金管理だけ丁寧にね。";
+        comment = "REG後フェザー確定が強いよ。数値が荒れても焦らず、資金管理だけ丁寧にね。";
       } else if(rank === "S"){
-        comment = "示唆と数値が噛み合ってる。ドラハナの荒れを許容しつつ、続行に寄せてOK。";
+        comment = "示唆と数値が噛み合ってる。ドラハナの荒れを許容しつつ続行寄りでOK。";
       } else if(rank === "A"){
-        comment = "期待できる材料が揃ってきたよ。REGが引けてるなら特に良い流れ。";
+        comment = "期待できる材料が揃ってきたよ。REGが引けてたら特に良い流れ。";
       } else if(rank === "B"){
-        comment = "中間〜上をまだ否定しない感じ。ドラハナは偏るから、強示唆待ちつつ様子見が安全。";
+        comment = "中間〜上をまだ否定しない感じ。強示唆待ちつつ様子見が安全かな。";
       } else {
-        comment = "今は強い根拠が少なめ。無理せず、次の当たりと示唆で再評価しよ。";
+        comment = "今は強い根拠が少なめ。無理せず次の当たりと示唆で再評価しよ。";
       }
 
-      // 表示用レート
-      const bonusRate = (g && totalBonus) ? fmtRate(g, totalBonus) : "-";
-      const regRate = (g && reg) ? fmtRate(g, reg) : "-";
-      const bigRate = (g && big) ? fmtRate(g, big) : "-";
-
-      // 確定表示
       const guaranteeText = guarantee ? guarantee : "確定：なし";
 
       return {
-        g, big, reg, totalBonus, phase, rank, rankText, guaranteeText,
+        phase, rankText: `${rankText}（スコア ${score.toFixed(2)}）`,
+        guaranteeText,
         bonusRate, regRate, bigRate,
-        distText,
+        distText: dist.text,
         reasons: reasons.filter(Boolean),
-        comment,
-        score: Number(score.toFixed(2))
+        comment
       };
     }
 
-    /***********************
-     * render judge
-     ***********************/
+    // render judge
     const judgeResult = document.getElementById("judgeResult");
     const rankTextEl = document.getElementById("rankText");
     const phaseTextEl = document.getElementById("phaseText");
@@ -981,17 +956,13 @@
       saveInputsFromUI();
       const r = judge();
       judgeResult.classList.remove("hidden");
-      rankTextEl.textContent = r.rankText + `（スコア ${r.score}）`;
+      rankTextEl.textContent = r.rankText;
       phaseTextEl.textContent = r.phase.label;
       guaranteeTextEl.textContent = r.guaranteeText;
-
       bonusRateEl.textContent = r.bonusRate;
       regRateEl.textContent = r.regRate;
       bigRateEl.textContent = r.bigRate;
-
       distHintEl.textContent = r.distText;
-
-      // 根拠は長くなりやすいので、いい感じに短く
       reasonTextEl.textContent = r.reasons.join("／");
       commentTextEl.textContent = r.comment;
     });
@@ -1007,9 +978,7 @@
       judgeResult.classList.add("hidden");
     });
 
-    /***********************
-     * modal: add hit (with batch input)
-     ***********************/
+    // modal
     const modalBackdrop = document.getElementById("modalBackdrop");
     const mHitG = document.getElementById("mHitG");
     const mTypeSeg = document.getElementById("mTypeSeg");
@@ -1021,6 +990,12 @@
     let modalType = "BIG";
     let modalSuiAdd = 0;
 
+    function setModalFields(){
+      const isBig = modalType === "BIG";
+      mFeatherBig.disabled = !isBig;
+      mFeatherReg.disabled = isBig;
+      mSideLamp.disabled = isBig;
+    }
     function openModal(){
       modalBackdrop.classList.remove("hidden");
       modalBackdrop.setAttribute("aria-hidden","false");
@@ -1028,28 +1003,21 @@
       modalType = "BIG";
       modalSuiAdd = 0;
       mSuiAdd.textContent = "0";
-      // reset selects
       mFeatherBig.value = "none";
       mFeatherReg.value = "none";
       mSideLamp.value = "none";
-      // seg UI
       Array.from(mTypeSeg.querySelectorAll("button")).forEach(b => b.classList.toggle("active", b.dataset.type === "BIG"));
       setModalFields();
-      // focus
-      setTimeout(()=>mHitG.focus(), 50);
+      setTimeout(()=>mHitG.focus(), 30);
     }
     function closeModal(){
       modalBackdrop.classList.add("hidden");
       modalBackdrop.setAttribute("aria-hidden","true");
     }
-    function setModalFields(){
-      // REG選択中はREG用フェザー/サイドを有効に見せる（実際は保存時に分岐）
-      const isBig = modalType === "BIG";
-      mFeatherBig.disabled = !isBig;
-      // REGはBIG中は無視されるけど、見た目も無効に
-      mFeatherReg.disabled = isBig;
-      mSideLamp.disabled = isBig;
-    }
+
+    document.getElementById("btnAddHit").addEventListener("click", openModal);
+    document.getElementById("btnQuickHit").addEventListener("click", openModal);
+    document.getElementById("mCancel").addEventListener("click", closeModal);
 
     mTypeSeg.addEventListener("click", (e) => {
       const btn = e.target.closest("button[data-type]");
@@ -1058,11 +1026,6 @@
       Array.from(mTypeSeg.querySelectorAll("button")).forEach(b => b.classList.toggle("active", b.dataset.type === modalType));
       setModalFields();
     });
-
-    document.getElementById("btnAddHit").addEventListener("click", openModal);
-    document.getElementById("btnQuickHit").addEventListener("click", openModal);
-
-    document.getElementById("mCancel").addEventListener("click", closeModal);
 
     document.getElementById("mSuiPlus").addEventListener("click", () => {
       modalSuiAdd += 1;
@@ -1079,10 +1042,7 @@
 
     function addHitRecord({applyCounts}){
       const g = parseIntSafe(mHitG.value);
-      if(g === null){
-        alert("当選G数を入れてね（例：380）");
-        return false;
-      }
+      if(g === null){ alert("当選G数を入れてね（例：380）"); return false; }
 
       const rec = {
         id: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + "_" + Math.random().toString(16).slice(2)),
@@ -1098,28 +1058,21 @@
       store.hits.push(rec);
 
       if(applyCounts){
-        // BIG/REG回数に反映（空欄なら0扱い）
         const big = parseIntSafe(elBigCnt.value) ?? 0;
         const reg = parseIntSafe(elRegCnt.value) ?? 0;
-
         if(modalType === "BIG") elBigCnt.value = String(big + 1);
         if(modalType === "REG") elRegCnt.value = String(reg + 1);
 
-        // スイカ反映
         if(modalType === "BIG" && modalSuiAdd > 0){
           store.inputs.sui = (store.inputs.sui ?? 0) + modalSuiAdd;
           elSuiVal.textContent = String(store.inputs.sui);
         }
       }
 
-      // 保存
       saveInputsFromUI();
       saveStore(store);
-
-      // 画面更新
       renderHits();
       renderHist();
-
       return true;
     }
 
@@ -1132,40 +1085,25 @@
       if(ok) closeModal();
     });
 
-    // backdrop click to close
     modalBackdrop.addEventListener("click", (e) => {
       if(e.target === modalBackdrop) closeModal();
     });
 
-    /***********************
-     * render hits (last 10)
-     ***********************/
+    // hits render
     const hitList = document.getElementById("hitList");
     const noHits = document.getElementById("noHits");
 
     function featherLabelBig(v){
-      if(v==="white") return "BIG後フェザー：白";
-      if(v==="blue") return "BIG後フェザー：青";
-      if(v==="yellow") return "BIG後フェザー：黄";
-      if(v==="green") return "BIG後フェザー：緑";
-      if(v==="red") return "BIG後フェザー：赤";
-      return null;
+      const map = {white:"BIG後フェザー：白", blue:"BIG後フェザー：青", yellow:"BIG後フェザー：黄", green:"BIG後フェザー：緑", red:"BIG後フェザー：赤"};
+      return map[v] || null;
     }
     function featherLabelReg(v){
-      if(v==="blue") return "REG後フェザー：青（2以上）";
-      if(v==="yellow") return "REG後フェザー：黄（3以上）";
-      if(v==="green") return "REG後フェザー：緑（4以上）";
-      if(v==="red") return "REG後フェザー：赤（5以上）";
-      if(v==="rainbow") return "REG後フェザー：虹（6）";
-      return null;
+      const map = {blue:"REG後フェザー：青（2以上）", yellow:"REG後フェザー：黄（3以上）", green:"REG後フェザー：緑（4以上）", red:"REG後フェザー：赤（5以上）", rainbow:"REG後フェザー：虹（6）"};
+      return map[v] || null;
     }
     function sideLampLabel(v){
-      if(v==="blue") return "サイド：青（奇数）";
-      if(v==="green") return "サイド：緑（奇数＋高寄り）";
-      if(v==="yellow") return "サイド：黄（偶数）";
-      if(v==="red") return "サイド：赤（偶数＋高寄り）";
-      if(v==="rainbow") return "サイド：虹（期待UP）";
-      return null;
+      const map = {blue:"サイド：青（奇数）", green:"サイド：緑（奇数＋高寄り）", yellow:"サイド：黄（偶数）", red:"サイド：赤（偶数＋高寄り）", rainbow:"サイド：虹（期待UP）"};
+      return map[v] || null;
     }
 
     function renderHits(){
@@ -1177,15 +1115,13 @@
       for(const h of last10){
         const lines = [];
         lines.push(`当選G：${h.g}G／種別：${h.type}`);
-        const f1 = (h.type==="BIG") ? featherLabelBig(h.featherBig) : featherLabelReg(h.featherReg);
-        if(f1) lines.push(f1);
+        const f = (h.type==="BIG") ? featherLabelBig(h.featherBig) : featherLabelReg(h.featherReg);
+        if(f) lines.push(f);
         if(h.type==="REG"){
           const s = sideLampLabel(h.sideLamp);
           if(s) lines.push(s);
         }
-        if(h.type==="BIG" && h.suiAdd > 0){
-          lines.push(`このBIGでスイカ +${h.suiAdd}`);
-        }
+        if(h.type==="BIG" && h.suiAdd > 0) lines.push(`このBIGでスイカ +${h.suiAdd}`);
 
         const item = document.createElement("div");
         item.className = "item";
@@ -1195,7 +1131,7 @@
               <div class="itemtitle">${escapeHtml(lines[0])}</div>
               <div class="meta">${escapeHtml(lines.slice(1).join("／") || "（詳細なし）")}<br>${jpTime(h.ts)}</div>
             </div>
-            <button class="btn danger" data-del="${h.id}">削除</button>
+            <button class="btn danger" data-del="${h.id}" type="button">削除</button>
           </div>
         `;
         hitList.appendChild(item);
@@ -1224,55 +1160,39 @@
       renderHist();
     });
 
-    /***********************
-     * render histogram table (100G bins)
-     ***********************/
+    // histogram
     const elHistMaxG = document.getElementById("histMaxG");
     const histWrap = document.getElementById("histWrap");
 
     function renderHist(){
       const maxOverride = parseIntSafe(elHistMaxG.value);
-      const bins = buildHistBins(maxOverride ?? 0);
-
-      // 0件ならメッセージ
-      if((store.hits || []).length === 0){
-        histWrap.innerHTML = `<div class="small" style="margin-top:10px;color:var(--muted);">当選履歴が無いので分布はまだ表示できないよ。</div>`;
+      const hits = store.hits || [];
+      if(!hits.length){
+        histWrap.innerHTML = `<div class="small" style="margin-top:10px;">当選履歴が無いので分布はまだ表示できないよ。</div>`;
         return;
       }
-
-      const rows = bins.map(b => {
-        const label = `${b.start}〜${b.end}G`;
-        return `
-          <tr>
-            <td>${label}</td>
-            <td class="right">${b.total}</td>
-            <td class="right">${b.BIG}</td>
-            <td class="right">${b.REG}</td>
-          </tr>
-        `;
-      }).join("");
-
+      const bins = buildHistBins(maxOverride ?? 0);
+      const rows = bins.map(b => `
+        <tr>
+          <td>${b.start}〜${b.end}G</td>
+          <td class="right">${b.total}</td>
+          <td class="right">${b.BIG}</td>
+          <td class="right">${b.REG}</td>
+        </tr>
+      `).join("");
       histWrap.innerHTML = `
         <table>
-          <thead>
-            <tr>
-              <th>区間</th>
-              <th class="right">合計</th>
-              <th class="right">BIG</th>
-              <th class="right">REG</th>
-            </tr>
-          </thead>
+          <thead><tr>
+            <th>区間</th><th class="right">合計</th><th class="right">BIG</th><th class="right">REG</th>
+          </tr></thead>
           <tbody>${rows}</tbody>
         </table>
       `;
     }
-
     document.getElementById("btnRefreshHist").addEventListener("click", renderHist);
     elHistMaxG.addEventListener("input", renderHist);
 
-    /***********************
-     * export / import
-     ***********************/
+    // export/import
     const exportBtn = document.getElementById("exportBtn");
     const importBtn = document.getElementById("importBtn");
     const importFile = document.getElementById("importFile");
@@ -1291,7 +1211,6 @@
     });
 
     importBtn.addEventListener("click", () => importFile.click());
-
     importFile.addEventListener("change", (e) => {
       const file = e.target.files[0];
       if(!file) return;
@@ -1321,9 +1240,7 @@
       location.reload();
     });
 
-    /***********************
-     * init
-     ***********************/
+    // init
     loadInputsToUI();
     renderHits();
     renderHist();
