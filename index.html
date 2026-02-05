@@ -12,13 +12,10 @@
       --muted:#aab6d6;
       --line:#24324f;
 
-      --green:#6ee7b7;
-      --yellow:#fbbf24;
-      --red:#fb7185;
-
       --btn:#1e2b47;
       --btn2:#243553;
       --accent:#7aa2ff;
+      --danger:#fb7185;
 
       --shadow: 0 10px 30px rgba(0,0,0,.35);
       --radius:16px;
@@ -39,10 +36,10 @@
       color:var(--text);
       padding:16px 12px 28px;
     }
-    .container{ max-width: 1050px; margin:0 auto; }
+    .container{ max-width: 1100px; margin:0 auto; }
     header{ display:flex; gap:12px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; margin: 8px 0 14px; }
     h1{ font-size:18px; margin:0; letter-spacing:.02em; }
-    .sub{ color:var(--muted); font-size:12px; line-height:1.6; margin-top:6px; max-width: 760px; }
+    .sub{ color:var(--muted); font-size:12px; line-height:1.6; margin-top:6px; max-width: 780px; }
     .pill{
       display:inline-flex; align-items:center; gap:8px;
       padding:8px 10px; border-radius:999px;
@@ -71,8 +68,8 @@
       border-color: rgba(122,162,255,.35);
     }
 
-    .grid{ display:grid; grid-template-columns: 1.2fr .8fr; gap:var(--gap); }
-    @media (max-width: 900px){ .grid{ grid-template-columns: 1fr; } }
+    .grid{ display:grid; grid-template-columns: 1.15fr .85fr; gap:var(--gap); }
+    @media (max-width: 920px){ .grid{ grid-template-columns: 1fr; } }
 
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
@@ -83,21 +80,17 @@
     }
     .card h2{ margin:0 0 12px; font-size:14px; letter-spacing:.02em; }
 
-    /* ---- unified form layout ---- */
     .formGrid{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
       gap: var(--gap);
       align-items:end;
     }
-    @media (max-width: 900px){
-      .formGrid{ grid-template-columns: repeat(12, 1fr); }
-    }
     .col-12{ grid-column: span 12; }
     .col-6{ grid-column: span 6; }
     .col-4{ grid-column: span 4; }
     .col-3{ grid-column: span 3; }
-    @media (max-width: 700px){
+    @media (max-width: 720px){
       .col-6,.col-4,.col-3{ grid-column: span 12; }
     }
 
@@ -121,12 +114,6 @@
       border-radius: var(--radius2);
       outline:none;
       font-size: 14px;
-    }
-    textarea{
-      height:auto;
-      min-height: 90px;
-      padding: 10px 12px;
-      resize: vertical;
     }
 
     .hint{ color:var(--muted); font-size:12px; line-height:1.5; margin-top:6px; }
@@ -164,8 +151,7 @@
       flex-wrap:wrap;
       align-items:center;
     }
-    .btnRow .btn{ flex: 0 0 auto; }
-    @media (max-width: 700px){
+    @media (max-width: 720px){
       .btnRow .btn{ flex: 1 1 180px; }
     }
 
@@ -188,7 +174,7 @@
     }
     .stepRow .btn{ width:100%; }
     .stepRow .chip{ width:100%; }
-    @media (max-width: 700px){
+    @media (max-width: 720px){
       .stepRow{ grid-template-columns: 1fr 1fr; }
     }
 
@@ -208,16 +194,17 @@
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       white-space:nowrap;
     }
+
     .kpi{
       display:grid;
       grid-template-columns: repeat(4, 1fr);
       gap:10px;
       margin-top: 10px;
     }
-    @media (max-width: 900px){ .kpi{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 920px){ .kpi{ grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 520px){ .kpi{ grid-template-columns: 1fr; } }
     .k{
       padding: 10px 12px;
@@ -227,6 +214,52 @@
     }
     .k .t{ font-size:12px; color:var(--muted); }
     .k .v{ font-size:16px; margin-top:6px; font-weight: 900; letter-spacing:.02em; }
+
+    /* 今日の履歴（右カードの小一覧） */
+    .todayWrap{ display:flex; flex-direction:column; gap:10px; }
+    .todayTop{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+    .todayList{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      max-height: 520px;
+      overflow:auto;
+      padding-right: 2px;
+    }
+    .miniRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      padding:8px 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .miniMain{
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: .01em;
+      min-width: 88px;
+    }
+    .miniSub{
+      color: var(--muted);
+      font-size: 12px;
+      flex: 1 1 auto;
+      min-width: 160px;
+    }
+    .miniDel{
+      height: 34px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border:1px solid rgba(251,113,133,.35);
+      background: rgba(251,113,133,.16);
+      color: var(--text);
+      cursor:pointer;
+      font-size: 12px;
+      font-weight: 900;
+      user-select:none;
+    }
 
     table{ width:100%; border-collapse: collapse; margin-top:10px; }
     th, td{
@@ -251,7 +284,7 @@
       z-index: 9999;
     }
     .modal{
-      width: min(760px, 100%);
+      width: min(820px, 100%);
       background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
       border:1px solid rgba(255,255,255,.12);
       border-radius: 18px;
@@ -279,42 +312,33 @@
       border-color: rgba(122,162,255,.35);
     }
     .small{ font-size:12px; color:var(--muted); line-height:1.6; }
-
-    .list{ display:flex; flex-direction:column; gap:10px; margin-top:10px; }
-    .item{
-      padding: 12px;
-      border-radius: var(--radius2);
-      background: rgba(15,24,42,.65);
-      border:1px solid rgba(255,255,255,.10);
-    }
-    .itemtop{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center; }
-    .itemtitle{ font-weight:900; letter-spacing:.02em; }
-    .meta{ color:var(--muted); font-size:12px; margin-top:6px; line-height:1.55; }
   </style>
 </head>
+
 <body>
   <div class="container">
     <header>
       <div>
-        <h1>ドラゴンハナハナ～閃光～｜設定判別ツール（個人用）</h1>
+        <h1>ドラゴンハナハナ～閃光～｜設定判別（個人用）</h1>
         <div class="sub">
           ・ドラハナは<strong>BIG偏向型</strong>（REGが弱い＝即NGはしません）<br>
-          ・REG後フェザーは<strong>設定確定</strong>（最優先）。BIG後フェザーは<strong>示唆のみ</strong><br>
-          ・当選G数は「合算の補助」だけに使用。分布は<strong>100G刻み</strong>
+          ・<strong>REG後フェザー＝設定確定（最優先）</strong>／BIG後フェザー＝示唆のみ<br>
+          ・当選G数は「合算の補助」＋「今日の履歴」＋「過去分布（アーカイブ）」に使うよ
         </div>
       </div>
-      <div class="pill"><strong>直近10件表示</strong><span style="color:var(--muted)">／</span><small>全件保存</small></div>
+      <div class="pill"><strong>今日の履歴</strong><span style="color:var(--muted)">は判定に表示</span></div>
     </header>
 
     <div class="tabs">
       <button class="tabbtn active" data-tab="judge">判定</button>
-      <button class="tabbtn" data-tab="hits">当選履歴・分布</button>
+      <button class="tabbtn" data-tab="dist">分布（過去）</button>
       <button class="tabbtn" data-tab="io">引き継ぎ</button>
     </div>
 
     <!-- 判定 -->
     <section id="tab-judge" class="tab">
       <div class="grid">
+        <!-- 左：入力＋判定 -->
         <div class="card">
           <h2>入力</h2>
 
@@ -322,7 +346,7 @@
             <div class="field col-6">
               <label>総回転数（通常G）</label>
               <input id="totalG" inputmode="numeric" placeholder="例：3200" />
-              <div class="hint">区間（序盤/中盤/終盤）の切替に使うよ。</div>
+              <div class="hint">序盤/中盤/終盤の重み付けに使うよ。</div>
             </div>
 
             <div class="field col-3">
@@ -336,13 +360,13 @@
             </div>
 
             <div class="field col-6">
-              <label>ベル回数（手入力）</label>
-              <input id="bellCnt" inputmode="numeric" placeholder="例：420（カチカチ君の合計）" />
-              <div class="hint">※ベルは逆算値のみなので判定は“参考”扱い。</div>
+              <label>ベル回数（任意・手入力）</label>
+              <input id="bellCnt" inputmode="numeric" placeholder="例：420" />
+              <div class="hint">※ベルは逆算値しか無いので「参考」扱い。</div>
             </div>
 
             <div class="field col-6">
-              <label>BIG中スイカ回数（ワンタップ）</label>
+              <label>BIG中スイカ（合計：ワンタップ）</label>
               <div class="stepRow">
                 <button class="btn" id="suiMinus" type="button">-1</button>
                 <div class="chip"><span id="suiVal">0</span>&nbsp;回</div>
@@ -355,7 +379,7 @@
             <div class="col-12">
               <div class="btnRow">
                 <button class="btn primary" id="btnJudge" type="button">判定する</button>
-                <button class="btn" id="btnQuickHit" type="button">当選を追加（まとめ入力）</button>
+                <button class="btn" id="btnAddBonus" type="button">ボーナス追加（当選G/色）</button>
                 <button class="btn ghost" id="btnResetAll" type="button">入力リセット</button>
               </div>
             </div>
@@ -372,61 +396,64 @@
               <div class="k"><div class="t">合算</div><div class="v" id="bonusRate">-</div></div>
               <div class="k"><div class="t">REG</div><div class="v" id="regRate">-</div></div>
               <div class="k"><div class="t">BIG</div><div class="v" id="bigRate">-</div></div>
-              <div class="k"><div class="t">当選G分布（補助）</div><div class="v" id="distHint">-</div></div>
+              <div class="k"><div class="t">当選Gの傾向（補助）</div><div class="v" id="distHint">-</div></div>
             </div>
 
             <div class="sep"></div>
             <div class="small">
               <div><strong>根拠</strong>：<span id="reasonText">-</span></div>
               <div style="margin-top:6px;"><strong>コメント</strong>：<span id="commentText">-</span></div>
-              <div style="margin-top:6px;">※ドラハナはBIG偏向型。REGが弱いこと自体は否定材料にしません（REGが良い時だけ加点）。</div>
+              <div style="margin-top:6px;">※ドラハナはBIG偏向型。REGが弱い＝即否定にはしないよ（REGが良い時だけ加点）。</div>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="small">
+            <div style="font-weight:900; color:var(--muted);">固定メモ</div>
+            <div style="margin-top:6px;">
+              ・REG後フェザー：青(2+) / 黄(3+) / 緑(4+) / 赤(5+) / 虹(6)<br>
+              ・BIG後フェザー：示唆のみ（青LOW〜赤やや高設定寄り）<br>
+              ・設定別 合算：設1 1/183 → 設6 1/133
             </div>
           </div>
         </div>
 
+        <!-- 右：今日の履歴（小一覧） -->
         <div class="card">
-          <h2>仕様メモ（固定）</h2>
-          <div class="small">
-            <div><strong>REG後フェザー</strong>：設定確定（最優先）</div>
-            <div><strong>BIG後フェザー</strong>：示唆のみ（青LOW〜赤やや高設定寄り）</div>
-            <div class="sep"></div>
-            <div>
-              <div style="color:var(--muted); font-weight:900;">設定別ボーナス確率</div>
-              <div style="margin-top:6px;">
-                設1 BIG1/256 REG1/642 合算1/183<br>
-                設2 BIG1/246 REG1/585 合算1/173<br>
-                設3 BIG1/235 REG1/537 合算1/163<br>
-                設4 BIG1/224 REG1/489 合算1/153<br>
-                設5 BIG1/212 REG1/442 合算1/143<br>
-                設6 BIG1/199 REG1/399 合算1/133
+          <h2>今日のボーナス履歴（一覧・小さめ）</h2>
+          <div class="todayWrap">
+            <div class="todayTop">
+              <div class="small">
+                <div><strong id="todayKeyText">-</strong></div>
+                <div>※今日の分だけここに全部出るよ。過去分は自動で「分布（過去）」へ移動。</div>
+              </div>
+              <div class="btnRow" style="margin:0;">
+                <button class="btn danger" id="btnClearToday" type="button">今日を全削除</button>
               </div>
             </div>
+
+            <div id="todayEmpty" class="small">まだ今日の履歴がありません。</div>
+            <div id="todayList" class="todayList"></div>
+
             <div class="sep"></div>
-            <div>ベルは逆算値しか無いので「参考」表示のみ。</div>
+            <div class="small">
+              例）<strong>125G BIG</strong>（スイカ+1 / フェザー青）<br>
+              例）<strong>80G REG</strong>（サイド緑 / REG後フェザー黄(3+)）
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 当選履歴・分布 -->
-    <section id="tab-hits" class="tab hidden">
+    <!-- 分布（過去） -->
+    <section id="tab-dist" class="tab hidden">
       <div class="grid">
         <div class="card">
-          <h2>直近10件（当選G）</h2>
-          <div class="small">※全件は保存。ここは直近のみ表示。</div>
-
-          <div class="btnRow" style="margin-top:12px;">
-            <button class="btn primary" id="btnAddHit" type="button">当選を追加（BIG/REG）</button>
-            <button class="btn danger" id="btnDelLast" type="button">直近1件削除</button>
+          <h2>当選分布（100G刻み・過去アーカイブ）</h2>
+          <div class="small">
+            ※ここは「過去分のみ」。今日の履歴は判定タブに置いて、終わったら自然にアーカイブされるよ。
           </div>
-
-          <div class="list" id="hitList"></div>
-          <div id="noHits" class="small" style="margin-top:10px;">まだ当選履歴がありません。</div>
-        </div>
-
-        <div class="card">
-          <h2>当選分布（100G刻み）</h2>
-          <div class="small">0〜100 / 100〜200 … で、BIG/REG別も表示。</div>
 
           <div class="formGrid" style="margin-top:12px;">
             <div class="field col-8">
@@ -441,6 +468,18 @@
 
           <div id="histWrap"></div>
         </div>
+
+        <div class="card">
+          <h2>アーカイブ状況</h2>
+          <div class="small" id="archiveStats">-</div>
+          <div class="sep"></div>
+          <div class="btnRow">
+            <button class="btn" id="btnForceArchive" type="button">過去分をアーカイブに移す（手動）</button>
+          </div>
+          <div class="small" style="margin-top:10px;">
+            ※通常はページを開いたタイミングで自動で仕分けされるよ。
+          </div>
+        </div>
       </div>
     </section>
 
@@ -450,7 +489,7 @@
         <h2>引き継ぎ（書き出し / 読み込み）</h2>
         <div class="small">
           端末変更やSafariのデータ消去に備えて、定期的にJSONを書き出してね。<br>
-          ※更新で履歴が消えないようにキー固定＋バージョン管理にしてあるよ。
+          ※更新しても履歴が消えないよう、保存キーと構造は固定してあるよ。
         </div>
 
         <div class="btnRow" style="margin-top:12px;">
@@ -466,13 +505,13 @@
   <!-- modal -->
   <div id="modalBackdrop" class="modal-backdrop hidden" aria-hidden="true">
     <div class="modal">
-      <h3>当選を追加（まとめ入力）</h3>
+      <h3>ボーナス追加（当選G / 色）</h3>
 
       <div class="formGrid">
         <div class="field col-6">
           <label>当選G数</label>
           <input id="mHitG" inputmode="numeric" placeholder="例：380" />
-          <div class="hint">当選Gは合算の補助＆分布保存に使うよ。</div>
+          <div class="hint">今日の履歴に追加されるよ（過去分は後で自動アーカイブ）。</div>
         </div>
 
         <div class="field col-6">
@@ -486,7 +525,7 @@
         <div class="col-12"><div class="sep"></div></div>
 
         <div class="field col-6">
-          <label>フェザー（BIG後：示唆のみ）</label>
+          <label>BIG後フェザー（示唆のみ）</label>
           <select id="mFeatherBig">
             <option value="none">未入力</option>
             <option value="white">白（LOW）</option>
@@ -498,7 +537,7 @@
         </div>
 
         <div class="field col-6">
-          <label>フェザー（REG後：設定確定）</label>
+          <label>REG後フェザー（設定確定）</label>
           <select id="mFeatherReg">
             <option value="none">未入力</option>
             <option value="blue">青（設定2以上確定）</option>
@@ -507,11 +546,11 @@
             <option value="red">赤（設定5以上確定）</option>
             <option value="rainbow">虹（設定6確定）</option>
           </select>
-          <div class="hint">※REG選択時のみ有効（BIG選択中は無効）。</div>
+          <div class="hint">※REG選択時のみ有効。</div>
         </div>
 
         <div class="field col-6">
-          <label>REG中サイドランプ（任意）</label>
+          <label>サイドランプ（任意）</label>
           <select id="mSideLamp">
             <option value="none">未入力</option>
             <option value="blue">青（奇数示唆）</option>
@@ -524,7 +563,7 @@
         </div>
 
         <div class="field col-6">
-          <label>このボーナスでBIG中スイカを足す（任意）</label>
+          <label>このBIGでスイカを足す（任意）</label>
           <div class="stepRow">
             <button class="btn" id="mSuiMinus" type="button">-1</button>
             <div class="chip"><span id="mSuiAdd">0</span>&nbsp;回</div>
@@ -538,12 +577,12 @@
           <div class="btnRow" style="justify-content:space-between;">
             <button class="btn ghost" id="mCancel" type="button">キャンセル</button>
             <div class="btnRow" style="flex:0 0 auto;">
-              <button class="btn" id="mSaveOnly" type="button">保存（当選だけ）</button>
-              <button class="btn primary" id="mSaveAndApply" type="button">保存してカウントにも反映</button>
+              <button class="btn" id="mSaveOnly" type="button">保存（履歴だけ）</button>
+              <button class="btn primary" id="mSaveAndApply" type="button">保存して回数にも反映</button>
             </div>
           </div>
           <div class="small" style="margin-top:8px;">
-            「保存してカウントにも反映」＝BIG/REG回数・スイカ回数に自動で加算（手間削減）。
+            「回数にも反映」＝BIG/REG回数＋スイカ合計も自動で増える（二度手間防止）。
           </div>
         </div>
       </div>
@@ -551,42 +590,72 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "dragon_hana_senka_v1";
-    const STORAGE_VERSION = 1;
+    /***********************
+     * 保存形式（固定）
+     ***********************/
+    const STORAGE_KEY = "dragon_hana_senka_v2";
+    const STORAGE_VERSION = 2;
+
+    function newStore(){
+      return {
+        version: STORAGE_VERSION,
+        inputs: { totalG:"", big:"", reg:"", bell:"", sui:0 },
+        // 今日の履歴（todayKey一致のもの）
+        todayKey: getTodayKey(),
+        hitsToday: [],
+        // 過去アーカイブ（分布用）
+        hitsArchive: []
+      };
+    }
 
     function loadStore(){
       const raw = localStorage.getItem(STORAGE_KEY);
       if(!raw){
-        const init = { version: STORAGE_VERSION, inputs: { totalG:"", big:"", reg:"", bell:"", sui:0 }, hits: [] };
+        const init = newStore();
         localStorage.setItem(STORAGE_KEY, JSON.stringify(init));
         return init;
       }
       try{
         const data = JSON.parse(raw);
         if(data && data.version === STORAGE_VERSION){
+          // 欠損補修
           if(!data.inputs) data.inputs = { totalG:"", big:"", reg:"", bell:"", sui:0 };
-          if(!Array.isArray(data.hits)) data.hits = [];
           if(typeof data.inputs.sui !== "number") data.inputs.sui = 0;
+          if(!Array.isArray(data.hitsToday)) data.hitsToday = [];
+          if(!Array.isArray(data.hitsArchive)) data.hitsArchive = [];
+          if(!data.todayKey) data.todayKey = getTodayKey();
           return data;
         }
       }catch(e){}
-      const fallback = { version: STORAGE_VERSION, inputs: { totalG:"", big:"", reg:"", bell:"", sui:0 }, hits: [] };
+      const fallback = newStore();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(fallback));
       return fallback;
     }
-    function saveStore(store){ localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }
-    let store = loadStore();
+
+    function saveStore(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }
 
     function parseIntSafe(v){
       const n = parseInt(String(v ?? "").replace(/[^\d]/g,""), 10);
       return Number.isFinite(n) ? n : null;
     }
-    function fmtRate(g, cnt){
-      if(!g || !cnt) return "-";
-      const r = g / cnt;
-      return `1/${r.toFixed(2)}`;
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;").replaceAll("'","&#039;");
     }
+    function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
+
+    function getTodayKey(){
+      // ローカル日付で YYYY-MM-DD
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth()+1).padStart(2,"0");
+      const da = String(d.getDate()).padStart(2,"0");
+      return `${y}-${m}-${da}`;
+    }
+
     function nowISO(){ return new Date().toISOString(); }
+
     function jpTime(iso){
       try{
         const d = new Date(iso);
@@ -598,127 +667,11 @@
         return `${y}/${m}/${da} ${hh}:${mm}`;
       }catch{ return iso; }
     }
-    function escapeHtml(s){
-      return String(s ?? "")
-        .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;").replaceAll("'","&#039;");
-    }
-    function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
 
-    // tabs
-    const tabBtns = Array.from(document.querySelectorAll(".tabbtn"));
-    const tabs = {
-      judge: document.getElementById("tab-judge"),
-      hits: document.getElementById("tab-hits"),
-      io: document.getElementById("tab-io"),
-    };
-    function openTab(name){
-      tabBtns.forEach(b => b.classList.toggle("active", b.dataset.tab === name));
-      Object.entries(tabs).forEach(([k,el]) => el.classList.toggle("hidden", k !== name));
-      if(name === "hits") { renderHits(); renderHist(); }
-    }
-    tabBtns.forEach(b => b.addEventListener("click", () => openTab(b.dataset.tab)));
-
-    // bind inputs
-    const elTotalG = document.getElementById("totalG");
-    const elBigCnt = document.getElementById("bigCnt");
-    const elRegCnt = document.getElementById("regCnt");
-    const elBellCnt = document.getElementById("bellCnt");
-    const elSuiVal = document.getElementById("suiVal");
-
-    function loadInputsToUI(){
-      elTotalG.value = store.inputs.totalG ?? "";
-      elBigCnt.value = store.inputs.big ?? "";
-      elRegCnt.value = store.inputs.reg ?? "";
-      elBellCnt.value = store.inputs.bell ?? "";
-      elSuiVal.textContent = String(store.inputs.sui ?? 0);
-    }
-    function saveInputsFromUI(){
-      store.inputs.totalG = elTotalG.value;
-      store.inputs.big = elBigCnt.value;
-      store.inputs.reg = elRegCnt.value;
-      store.inputs.bell = elBellCnt.value;
-      saveStore(store);
-    }
-    ["input","change"].forEach(evt => {
-      elTotalG.addEventListener(evt, saveInputsFromUI);
-      elBigCnt.addEventListener(evt, saveInputsFromUI);
-      elRegCnt.addEventListener(evt, saveInputsFromUI);
-      elBellCnt.addEventListener(evt, saveInputsFromUI);
-    });
-
-    // sui counter
-    document.getElementById("suiPlus").addEventListener("click", () => {
-      store.inputs.sui = (store.inputs.sui ?? 0) + 1;
-      elSuiVal.textContent = String(store.inputs.sui);
-      saveStore(store);
-    });
-    document.getElementById("suiMinus").addEventListener("click", () => {
-      store.inputs.sui = Math.max(0, (store.inputs.sui ?? 0) - 1);
-      elSuiVal.textContent = String(store.inputs.sui);
-      saveStore(store);
-    });
-    document.getElementById("suiReset").addEventListener("click", () => {
-      store.inputs.sui = 0;
-      elSuiVal.textContent = "0";
-      saveStore(store);
-    });
-
-    function phaseFromG(g){
-      if(g >= 4000) return {key:"late", label:"終盤（4000G〜）"};
-      if(g >= 2500) return {key:"mid",  label:"中盤（2500〜4000G）"};
-      if(g >= 1000) return {key:"early",label:"序盤（1000〜2500G）"};
-      return {key:"pre", label:"準備（〜1000G）"};
-    }
-
-    // distribution
-    function buildHistBins(maxGOverride){
-      const hits = store.hits || [];
-      const maxHit = hits.reduce((m,h)=>Math.max(m, h.g||0), 0);
-      const maxG = Math.max(100, maxGOverride ?? 0, maxHit);
-      const upper = Math.ceil(maxG / 100) * 100;
-
-      const bins = [];
-      for(let start=0; start<upper; start+=100){
-        bins.push({ start, end:start+100, total:0, BIG:0, REG:0 });
-      }
-      for(const h of hits){
-        const g = h.g ?? 0;
-        const idx = Math.floor(g / 100);
-        if(idx >= 0 && idx < bins.length){
-          bins[idx].total++;
-          if(h.type === "BIG") bins[idx].BIG++;
-          if(h.type === "REG") bins[idx].REG++;
-        }
-      }
-      return bins;
-    }
-
-    function distScoreHint(){
-      const hits = store.hits || [];
-      if(hits.length < 8) return { text:"データ少（補助は弱め）", score: 0 };
-
-      const recent = hits.slice(-20);
-      let shallow = 0; // 0-200
-      let deep = 0;    // 600+
-      for(const h of recent){
-        if(h.g < 200) shallow++;
-        if(h.g >= 600) deep++;
-      }
-      let score = 0;
-      if(shallow >= 8) score += 2;
-      else if(shallow >= 6) score += 1;
-
-      if(deep >= 6) score -= 2;
-      else if(deep >= 4) score -= 1;
-
-      let text = "中立";
-      if(score >= 2) text = "浅い当選が多め（合算は少し良化）";
-      else if(score === 1) text = "浅い当選がやや多め（少し良化）";
-      else if(score === -1) text = "深めがやや目立つ（少し注意）";
-      else if(score <= -2) text = "深いハマりが目立つ（合算に注意）";
-
-      return { text, score };
+    function fmtRate(g, cnt){
+      if(!g || !cnt) return "-";
+      const r = g / cnt;
+      return `1/${r.toFixed(2)}`;
     }
 
     function minSettingFromRegFeather(val){
@@ -738,21 +691,146 @@
       return 0.0;
     }
     function sideLampHint(val){
-      if(val === "blue") return { odd:1, even:0, hi:0 };
-      if(val === "green") return { odd:1, even:0, hi:0.3 };
-      if(val === "yellow") return { odd:0, even:1, hi:0 };
-      if(val === "red") return { odd:0, even:1, hi:0.3 };
-      if(val === "rainbow") return { odd:0, even:0, hi:0.8 };
-      return { odd:0, even:0, hi:0 };
+      if(val === "blue") return { odd:1, even:0 };
+      if(val === "green") return { odd:1, even:0 };
+      if(val === "yellow") return { odd:0, even:1 };
+      if(val === "red") return { odd:0, even:1 };
+      return { odd:0, even:0 };
     }
-    function aggregateHints(){
-      const hits = store.hits || [];
+
+    /***********************
+     * 自動アーカイブ
+     * - ページを開いた時点で
+     *   store.todayKey が今日と違えば
+     *   hitsToday を hitsArchive に移す
+     ***********************/
+    function autoArchiveIfNeeded(){
+      const today = getTodayKey();
+      if(store.todayKey !== today){
+        // 旧hitsTodayをアーカイブへ
+        if(store.hitsToday.length){
+          store.hitsArchive.push(...store.hitsToday);
+        }
+        store.hitsToday = [];
+        store.todayKey = today;
+        saveStore();
+      }
+    }
+
+    /***********************
+     * tabs
+     ***********************/
+    const tabBtns = Array.from(document.querySelectorAll(".tabbtn"));
+    const tabs = {
+      judge: document.getElementById("tab-judge"),
+      dist: document.getElementById("tab-dist"),
+      io: document.getElementById("tab-io"),
+    };
+    function openTab(name){
+      tabBtns.forEach(b => b.classList.toggle("active", b.dataset.tab === name));
+      Object.entries(tabs).forEach(([k,el]) => el.classList.toggle("hidden", k !== name));
+      if(name === "dist"){ renderHist(); renderArchiveStats(); }
+      if(name === "judge"){ renderTodayList(); }
+    }
+    tabBtns.forEach(b => b.addEventListener("click", () => openTab(b.dataset.tab)));
+
+    /***********************
+     * store init
+     ***********************/
+    let store = loadStore();
+    autoArchiveIfNeeded(); // 起動時に仕分け
+    document.getElementById("todayKeyText").textContent = store.todayKey;
+
+    /***********************
+     * inputs bind
+     ***********************/
+    const elTotalG = document.getElementById("totalG");
+    const elBigCnt = document.getElementById("bigCnt");
+    const elRegCnt = document.getElementById("regCnt");
+    const elBellCnt = document.getElementById("bellCnt");
+    const elSuiVal = document.getElementById("suiVal");
+
+    function loadInputsToUI(){
+      elTotalG.value = store.inputs.totalG ?? "";
+      elBigCnt.value = store.inputs.big ?? "";
+      elRegCnt.value = store.inputs.reg ?? "";
+      elBellCnt.value = store.inputs.bell ?? "";
+      elSuiVal.textContent = String(store.inputs.sui ?? 0);
+    }
+    function saveInputsFromUI(){
+      store.inputs.totalG = elTotalG.value;
+      store.inputs.big = elBigCnt.value;
+      store.inputs.reg = elRegCnt.value;
+      store.inputs.bell = elBellCnt.value;
+      saveStore();
+    }
+
+    ["input","change"].forEach(evt => {
+      elTotalG.addEventListener(evt, saveInputsFromUI);
+      elBigCnt.addEventListener(evt, saveInputsFromUI);
+      elRegCnt.addEventListener(evt, saveInputsFromUI);
+      elBellCnt.addEventListener(evt, saveInputsFromUI);
+    });
+
+    document.getElementById("suiPlus").addEventListener("click", () => {
+      store.inputs.sui = (store.inputs.sui ?? 0) + 1;
+      elSuiVal.textContent = String(store.inputs.sui);
+      saveStore();
+    });
+    document.getElementById("suiMinus").addEventListener("click", () => {
+      store.inputs.sui = Math.max(0, (store.inputs.sui ?? 0) - 1);
+      elSuiVal.textContent = String(store.inputs.sui);
+      saveStore();
+    });
+    document.getElementById("suiReset").addEventListener("click", () => {
+      store.inputs.sui = 0;
+      elSuiVal.textContent = "0";
+      saveStore();
+    });
+
+    /***********************
+     * 判定ロジック
+     ***********************/
+    function phaseFromG(g){
+      if(g >= 4000) return {key:"late", label:"終盤（4000G〜）"};
+      if(g >= 2500) return {key:"mid",  label:"中盤（2500〜4000G）"};
+      if(g >= 1000) return {key:"early",label:"序盤（1000〜2500G）"};
+      return {key:"pre", label:"準備（〜1000G）"};
+    }
+
+    function distScoreHintFromToday(){
+      const hits = store.hitsToday || [];
+      if(hits.length < 8) return { text:"データ少（補助弱め）", score: 0 };
+
+      const recent = hits.slice(-20);
+      let shallow = 0; // 0-200
+      let deep = 0;    // 600+
+      for(const h of recent){
+        if((h.g ?? 0) < 200) shallow++;
+        if((h.g ?? 0) >= 600) deep++;
+      }
+      let score = 0;
+      if(shallow >= 8) score += 2;
+      else if(shallow >= 6) score += 1;
+
+      if(deep >= 6) score -= 2;
+      else if(deep >= 4) score -= 1;
+
+      let text = "中立";
+      if(score >= 2) text = "浅い当選が多め（合算が少し良化しやすい）";
+      else if(score === 1) text = "浅い当選がやや多め（少し良化）";
+      else if(score === -1) text = "深めがやや目立つ（少し注意）";
+      else if(score <= -2) text = "深いハマりが目立つ（合算に注意）";
+      return { text, score };
+    }
+
+    function aggregateHintsFromToday(){
+      const hits = store.hitsToday || [];
       let minSet = 0;
       let bigFeather = 0;
       let odd = 0, even = 0;
 
-      const recent = hits.slice(-100);
-      for(const h of recent){
+      for(const h of hits){
         if(h.type === "REG"){
           const ms = minSettingFromRegFeather(h.featherReg);
           if(ms) minSet = Math.max(minSet, ms);
@@ -763,12 +841,14 @@
           bigFeather += bigFeatherScore(h.featherBig);
         }
       }
+
       let parity = "不明";
       if(odd + even >= 6){
         if(odd > even + 1) parity = "奇数寄り";
         else if(even > odd + 1) parity = "偶数寄り";
         else parity = "拮抗";
       }
+
       return { minSet, bigFeather, parity };
     }
 
@@ -782,8 +862,8 @@
       const phase = phaseFromG(g);
       const totalBonus = big + reg;
 
-      const dist = distScoreHint();
-      const hints = aggregateHints();
+      const dist = distScoreHintFromToday();
+      const hints = aggregateHintsFromToday();
 
       let guarantee = null;
       if(hints.minSet >= 6) guarantee = "設定6濃厚（REG後フェザー虹）";
@@ -795,13 +875,14 @@
       let score = 0;
       let reasons = [];
 
+      // BIG後フェザー（示唆）
       if(hints.bigFeather > 0){
         const add = clamp(hints.bigFeather, 0, 3);
         score += add;
         reasons.push(`BIG後フェザー示唆 +${add.toFixed(1)}`);
       }
 
-      // 合算（控えめに評価）
+      // 合算（控えめ）
       if(g >= 500 && totalBonus >= 3){
         const obsAll = g / Math.max(1, totalBonus);
         const good = obsAll <= 163;
@@ -842,7 +923,7 @@
         reasons.push("REG：少ない場合は加点しづらい（否定はしない）");
       }
 
-      // BIG（偏り許容：軽い加点のみ）
+      // BIG（軽い加点）
       if(g >= 800 && big >= 2){
         const obsBig = g / Math.max(1, big);
         let w = 1.0;
@@ -875,7 +956,7 @@
         reasons.push("BIG中スイカ：サンプル少（参考）");
       }
 
-      // ベル参考コメント
+      // ベル参考
       let bellMsg = "ベル：未入力";
       if(bell !== null && g > 0){
         const rate = g / Math.max(1, bell);
@@ -892,47 +973,35 @@
       const regRate = (g && reg) ? fmtRate(g, reg) : "-";
       const bigRate = (g && big) ? fmtRate(g, big) : "-";
 
-      let rank = "NG";
       let rankText = "NG：慎重（低設定寄りの可能性）";
-      if(score >= 11) { rank="S"; rankText="S：高設定濃厚（粘る価値大）"; }
-      else if(score >= 8) { rank="A"; rankText="A：高設定期待（続行候補）"; }
-      else if(score >= 5) { rank="B"; rankText="B：中間の可能性（様子見）"; }
+      if(score >= 11) rankText="S：高設定濃厚（粘る価値大）";
+      else if(score >= 8) rankText="A：高設定期待（続行候補）";
+      else if(score >= 5) rankText="B：中間の可能性（様子見）";
 
-      // 確定で上書き/底上げ
-      if(hints.minSet >= 6){
-        rank="S"; rankText="S：設定6濃厚（確定）";
-      } else if(hints.minSet >= 5){
-        rank="S"; rankText="S：設定5以上濃厚（確定）";
-      } else if(hints.minSet >= 4){
-        if(rank === "NG") rank="B";
-        if(rank === "B") rank="A";
-        rankText="A：設定4以上濃厚（確定）";
-      } else if(hints.minSet >= 3){
-        if(rank === "NG") rank="B";
-        rankText="B：設定3以上濃厚（確定）";
-      } else if(hints.minSet >= 2){
-        if(rank === "NG") rank="B";
-        rankText="B：設定2以上濃厚（確定）";
-      }
+      // 確定で上書き
+      if(hints.minSet >= 6) rankText="S：設定6濃厚（確定）";
+      else if(hints.minSet >= 5) rankText="S：設定5以上濃厚（確定）";
+      else if(hints.minSet >= 4) rankText="A：設定4以上濃厚（確定）";
+      else if(hints.minSet >= 3) rankText="B：設定3以上濃厚（確定）";
+      else if(hints.minSet >= 2) rankText="B：設定2以上濃厚（確定）";
 
       let comment = "";
       if(hints.minSet >= 4){
         comment = "REG後フェザー確定が強いよ。数値が荒れても焦らず、資金管理だけ丁寧にね。";
-      } else if(rank === "S"){
+      } else if(rankText.startsWith("S")){
         comment = "示唆と数値が噛み合ってる。ドラハナの荒れを許容しつつ続行寄りでOK。";
-      } else if(rank === "A"){
+      } else if(rankText.startsWith("A")){
         comment = "期待できる材料が揃ってきたよ。REGが引けてたら特に良い流れ。";
-      } else if(rank === "B"){
+      } else if(rankText.startsWith("B")){
         comment = "中間〜上をまだ否定しない感じ。強示唆待ちつつ様子見が安全かな。";
       } else {
         comment = "今は強い根拠が少なめ。無理せず次の当たりと示唆で再評価しよ。";
       }
 
-      const guaranteeText = guarantee ? guarantee : "確定：なし";
-
       return {
-        phase, rankText: `${rankText}（スコア ${score.toFixed(2)}）`,
-        guaranteeText,
+        phaseLabel: phase.label,
+        rankText: `${rankText}（スコア ${score.toFixed(2)}）`,
+        guaranteeText: guarantee ? guarantee : "確定：なし",
         bonusRate, regRate, bigRate,
         distText: dist.text,
         reasons: reasons.filter(Boolean),
@@ -940,7 +1009,9 @@
       };
     }
 
-    // render judge
+    /***********************
+     * 判定描画
+     ***********************/
     const judgeResult = document.getElementById("judgeResult");
     const rankTextEl = document.getElementById("rankText");
     const phaseTextEl = document.getElementById("phaseText");
@@ -957,7 +1028,7 @@
       const r = judge();
       judgeResult.classList.remove("hidden");
       rankTextEl.textContent = r.rankText;
-      phaseTextEl.textContent = r.phase.label;
+      phaseTextEl.textContent = r.phaseLabel;
       guaranteeTextEl.textContent = r.guaranteeText;
       bonusRateEl.textContent = r.bonusRate;
       regRateEl.textContent = r.regRate;
@@ -973,19 +1044,85 @@
       elRegCnt.value = "";
       elBellCnt.value = "";
       store.inputs = { totalG:"", big:"", reg:"", bell:"", sui:0 };
-      saveStore(store);
+      saveStore();
       elSuiVal.textContent = "0";
       judgeResult.classList.add("hidden");
     });
 
-    // modal
+    /***********************
+     * 今日の履歴（右カード）
+     ***********************/
+    const todayEmpty = document.getElementById("todayEmpty");
+    const todayList = document.getElementById("todayList");
+    function colorJP(v){
+      const map = {white:"白", blue:"青", yellow:"黄", green:"緑", red:"赤", rainbow:"虹"};
+      return map[v] || v;
+    }
+    function regFeatherJP(v){
+      const map = {blue:"青(2+)", yellow:"黄(3+)", green:"緑(4+)", red:"赤(5+)", rainbow:"虹(6)"};
+      return map[v] || v;
+    }
+    function makeMiniSub(h){
+      if(h.type === "BIG"){
+        const parts = [];
+        if(h.suiAdd && h.suiAdd > 0) parts.push(`スイカ+${h.suiAdd}`);
+        if(h.featherBig && h.featherBig !== "none") parts.push(`フェザー${colorJP(h.featherBig)}`);
+        return parts.join(" / ") || "（詳細なし）";
+      } else {
+        const parts = [];
+        if(h.sideLamp && h.sideLamp !== "none") parts.push(`サイド${colorJP(h.sideLamp)}`);
+        if(h.featherReg && h.featherReg !== "none") parts.push(`REG後フェザー${regFeatherJP(h.featherReg)}`);
+        return parts.join(" / ") || "（詳細なし）";
+      }
+    }
+
+    function renderTodayList(){
+      const hits = store.hitsToday || [];
+      if(!hits.length){
+        todayEmpty.style.display = "block";
+        todayList.innerHTML = "";
+        return;
+      }
+      todayEmpty.style.display = "none";
+      // 最新が上
+      const view = hits.slice().reverse();
+      todayList.innerHTML = view.map(h => `
+        <div class="miniRow">
+          <div class="miniMain">${h.g}G ${h.type}</div>
+          <div class="miniSub">${escapeHtml(makeMiniSub(h))}</div>
+          <button class="miniDel" data-del="${h.id}">削除</button>
+        </div>
+      `).join("");
+
+      todayList.querySelectorAll("[data-del]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-del");
+          if(!confirm("この履歴を削除する？")) return;
+          store.hitsToday = (store.hitsToday || []).filter(x => x.id !== id);
+          saveStore();
+          renderTodayList();
+        });
+      });
+    }
+
+    document.getElementById("btnClearToday").addEventListener("click", () => {
+      if(!(store.hitsToday || []).length) return;
+      if(!confirm("今日の履歴を全部削除する？（元に戻せません）")) return;
+      store.hitsToday = [];
+      saveStore();
+      renderTodayList();
+    });
+
+    /***********************
+     * modal（ボーナス追加）
+     ***********************/
     const modalBackdrop = document.getElementById("modalBackdrop");
     const mHitG = document.getElementById("mHitG");
     const mTypeSeg = document.getElementById("mTypeSeg");
     const mFeatherBig = document.getElementById("mFeatherBig");
     const mFeatherReg = document.getElementById("mFeatherReg");
     const mSideLamp = document.getElementById("mSideLamp");
-    const mSuiAdd = document.getElementById("mSuiAdd");
+    const mSuiAddEl = document.getElementById("mSuiAdd");
 
     let modalType = "BIG";
     let modalSuiAdd = 0;
@@ -1002,7 +1139,7 @@
       mHitG.value = "";
       modalType = "BIG";
       modalSuiAdd = 0;
-      mSuiAdd.textContent = "0";
+      mSuiAddEl.textContent = "0";
       mFeatherBig.value = "none";
       mFeatherReg.value = "none";
       mSideLamp.value = "none";
@@ -1015,8 +1152,7 @@
       modalBackdrop.setAttribute("aria-hidden","true");
     }
 
-    document.getElementById("btnAddHit").addEventListener("click", openModal);
-    document.getElementById("btnQuickHit").addEventListener("click", openModal);
+    document.getElementById("btnAddBonus").addEventListener("click", openModal);
     document.getElementById("mCancel").addEventListener("click", closeModal);
 
     mTypeSeg.addEventListener("click", (e) => {
@@ -1029,24 +1165,30 @@
 
     document.getElementById("mSuiPlus").addEventListener("click", () => {
       modalSuiAdd += 1;
-      mSuiAdd.textContent = String(modalSuiAdd);
+      mSuiAddEl.textContent = String(modalSuiAdd);
     });
     document.getElementById("mSuiMinus").addEventListener("click", () => {
       modalSuiAdd = Math.max(0, modalSuiAdd - 1);
-      mSuiAdd.textContent = String(modalSuiAdd);
+      mSuiAddEl.textContent = String(modalSuiAdd);
     });
     document.getElementById("mSuiZero").addEventListener("click", () => {
       modalSuiAdd = 0;
-      mSuiAdd.textContent = "0";
+      mSuiAddEl.textContent = "0";
     });
 
-    function addHitRecord({applyCounts}){
+    function addBonusRecord({applyCounts}){
       const g = parseIntSafe(mHitG.value);
       if(g === null){ alert("当選G数を入れてね（例：380）"); return false; }
 
+      // 念のため、追加直前にも日付チェック（深夜跨ぎ対策）
+      autoArchiveIfNeeded();
+      document.getElementById("todayKeyText").textContent = store.todayKey;
+
+      const id = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + "_" + Math.random().toString(16).slice(2));
       const rec = {
-        id: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + "_" + Math.random().toString(16).slice(2)),
+        id,
         ts: nowISO(),
+        dayKey: store.todayKey,
         g,
         type: modalType,
         featherBig: (modalType === "BIG" ? mFeatherBig.value : "none"),
@@ -1055,7 +1197,7 @@
         suiAdd: (modalType === "BIG" ? modalSuiAdd : 0)
       };
 
-      store.hits.push(rec);
+      store.hitsToday.push(rec);
 
       if(applyCounts){
         const big = parseIntSafe(elBigCnt.value) ?? 0;
@@ -1070,18 +1212,17 @@
       }
 
       saveInputsFromUI();
-      saveStore(store);
-      renderHits();
-      renderHist();
+      saveStore();
+      renderTodayList();
       return true;
     }
 
     document.getElementById("mSaveOnly").addEventListener("click", () => {
-      const ok = addHitRecord({applyCounts:false});
+      const ok = addBonusRecord({applyCounts:false});
       if(ok) closeModal();
     });
     document.getElementById("mSaveAndApply").addEventListener("click", () => {
-      const ok = addHitRecord({applyCounts:true});
+      const ok = addBonusRecord({applyCounts:true});
       if(ok) closeModal();
     });
 
@@ -1089,89 +1230,43 @@
       if(e.target === modalBackdrop) closeModal();
     });
 
-    // hits render
-    const hitList = document.getElementById("hitList");
-    const noHits = document.getElementById("noHits");
-
-    function featherLabelBig(v){
-      const map = {white:"BIG後フェザー：白", blue:"BIG後フェザー：青", yellow:"BIG後フェザー：黄", green:"BIG後フェザー：緑", red:"BIG後フェザー：赤"};
-      return map[v] || null;
-    }
-    function featherLabelReg(v){
-      const map = {blue:"REG後フェザー：青（2以上）", yellow:"REG後フェザー：黄（3以上）", green:"REG後フェザー：緑（4以上）", red:"REG後フェザー：赤（5以上）", rainbow:"REG後フェザー：虹（6）"};
-      return map[v] || null;
-    }
-    function sideLampLabel(v){
-      const map = {blue:"サイド：青（奇数）", green:"サイド：緑（奇数＋高寄り）", yellow:"サイド：黄（偶数）", red:"サイド：赤（偶数＋高寄り）", rainbow:"サイド：虹（期待UP）"};
-      return map[v] || null;
-    }
-
-    function renderHits(){
-      const hits = store.hits || [];
-      hitList.innerHTML = "";
-      noHits.style.display = hits.length ? "none" : "block";
-
-      const last10 = hits.slice(-10).reverse();
-      for(const h of last10){
-        const lines = [];
-        lines.push(`当選G：${h.g}G／種別：${h.type}`);
-        const f = (h.type==="BIG") ? featherLabelBig(h.featherBig) : featherLabelReg(h.featherReg);
-        if(f) lines.push(f);
-        if(h.type==="REG"){
-          const s = sideLampLabel(h.sideLamp);
-          if(s) lines.push(s);
-        }
-        if(h.type==="BIG" && h.suiAdd > 0) lines.push(`このBIGでスイカ +${h.suiAdd}`);
-
-        const item = document.createElement("div");
-        item.className = "item";
-        item.innerHTML = `
-          <div class="itemtop">
-            <div>
-              <div class="itemtitle">${escapeHtml(lines[0])}</div>
-              <div class="meta">${escapeHtml(lines.slice(1).join("／") || "（詳細なし）")}<br>${jpTime(h.ts)}</div>
-            </div>
-            <button class="btn danger" data-del="${h.id}" type="button">削除</button>
-          </div>
-        `;
-        hitList.appendChild(item);
-      }
-
-      hitList.querySelectorAll("[data-del]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const id = btn.getAttribute("data-del");
-          if(!confirm("この当選履歴を削除する？（元に戻せません）")) return;
-          store.hits = (store.hits || []).filter(x => x.id !== id);
-          saveStore(store);
-          renderHits();
-          renderHist();
-        });
-      });
-    }
-
-    document.getElementById("btnDelLast").addEventListener("click", () => {
-      const hits = store.hits || [];
-      if(!hits.length) return;
-      if(!confirm("直近1件を削除する？")) return;
-      hits.pop();
-      store.hits = hits;
-      saveStore(store);
-      renderHits();
-      renderHist();
-    });
-
-    // histogram
+    /***********************
+     * 分布（過去アーカイブ）
+     ***********************/
     const elHistMaxG = document.getElementById("histMaxG");
     const histWrap = document.getElementById("histWrap");
+    const archiveStats = document.getElementById("archiveStats");
+
+    function buildHistBinsFromArchive(maxGOverride){
+      const hits = store.hitsArchive || [];
+      const maxHit = hits.reduce((m,h)=>Math.max(m, h.g||0), 0);
+      const maxG = Math.max(100, maxGOverride ?? 0, maxHit);
+      const upper = Math.ceil(maxG / 100) * 100;
+
+      const bins = [];
+      for(let start=0; start<upper; start+=100){
+        bins.push({ start, end:start+100, total:0, BIG:0, REG:0 });
+      }
+      for(const h of hits){
+        const g = h.g ?? 0;
+        const idx = Math.floor(g / 100);
+        if(idx >= 0 && idx < bins.length){
+          bins[idx].total++;
+          if(h.type === "BIG") bins[idx].BIG++;
+          if(h.type === "REG") bins[idx].REG++;
+        }
+      }
+      return bins;
+    }
 
     function renderHist(){
       const maxOverride = parseIntSafe(elHistMaxG.value);
-      const hits = store.hits || [];
+      const hits = store.hitsArchive || [];
       if(!hits.length){
-        histWrap.innerHTML = `<div class="small" style="margin-top:10px;">当選履歴が無いので分布はまだ表示できないよ。</div>`;
+        histWrap.innerHTML = `<div class="small" style="margin-top:10px;">過去アーカイブがまだ無いので、分布は表示できないよ。</div>`;
         return;
       }
-      const bins = buildHistBins(maxOverride ?? 0);
+      const bins = buildHistBinsFromArchive(maxOverride ?? 0);
       const rows = bins.map(b => `
         <tr>
           <td>${b.start}〜${b.end}G</td>
@@ -1189,10 +1284,48 @@
         </table>
       `;
     }
-    document.getElementById("btnRefreshHist").addEventListener("click", renderHist);
-    elHistMaxG.addEventListener("input", renderHist);
 
-    // export/import
+    function renderArchiveStats(){
+      const today = store.hitsToday?.length ?? 0;
+      const arc = store.hitsArchive?.length ?? 0;
+      const minDay = store.hitsArchive.reduce((m,h)=> m ? (String(h.dayKey) < m ? String(h.dayKey) : m) : String(h.dayKey), "");
+      const maxDay = store.hitsArchive.reduce((m,h)=> m ? (String(h.dayKey) > m ? String(h.dayKey) : m) : String(h.dayKey), "");
+
+      let range = "（まだ無し）";
+      if(arc > 0) range = `${minDay} 〜 ${maxDay}`;
+
+      archiveStats.textContent = `今日：${today}件 ／ アーカイブ（過去）：${arc}件 ／ 期間：${range}`;
+    }
+
+    document.getElementById("btnRefreshHist").addEventListener("click", () => {
+      renderHist(); renderArchiveStats();
+    });
+    elHistMaxG.addEventListener("input", () => { renderHist(); });
+
+    document.getElementById("btnForceArchive").addEventListener("click", () => {
+      autoArchiveIfNeeded();
+      // 手動アーカイブ：今日以外のdayKeyを today側に混入してた場合も救済
+      const today = getTodayKey();
+      const keep = [];
+      const move = [];
+      for(const h of store.hitsToday || []){
+        if(String(h.dayKey) === today) keep.push(h);
+        else move.push(h);
+      }
+      if(move.length){
+        store.hitsArchive.push(...move);
+        store.hitsToday = keep;
+        saveStore();
+      }
+      renderTodayList();
+      renderHist();
+      renderArchiveStats();
+      alert("アーカイブ仕分けを実行しました。");
+    });
+
+    /***********************
+     * 引き継ぎ（JSON）
+     ***********************/
     const exportBtn = document.getElementById("exportBtn");
     const importBtn = document.getElementById("importBtn");
     const importFile = document.getElementById("importFile");
@@ -1218,7 +1351,13 @@
       reader.onload = () => {
         try{
           const parsed = JSON.parse(reader.result);
-          if(parsed && parsed.version === STORAGE_VERSION && parsed.inputs && Array.isArray(parsed.hits)){
+          if(parsed && parsed.version === STORAGE_VERSION){
+            // 最低限の形チェック
+            if(!parsed.inputs) parsed.inputs = { totalG:"", big:"", reg:"", bell:"", sui:0 };
+            if(!Array.isArray(parsed.hitsToday)) parsed.hitsToday = [];
+            if(!Array.isArray(parsed.hitsArchive)) parsed.hitsArchive = [];
+            if(!parsed.todayKey) parsed.todayKey = getTodayKey();
+
             localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
             alert("読み込みました。再読み込みします。");
             location.reload();
@@ -1240,9 +1379,13 @@
       location.reload();
     });
 
-    // init
+    /***********************
+     * 起動時
+     ***********************/
     loadInputsToUI();
-    renderHits();
+    renderTodayList();
+    renderArchiveStats();
+    // 分布はタブ開いたときに描画でもOKだけど、初回も軽く
     renderHist();
   </script>
 </body>
